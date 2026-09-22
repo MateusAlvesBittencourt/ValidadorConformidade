@@ -7,39 +7,12 @@
   "observacao": "Edite somente este arquivo para alterar a lista do perfil. Use ativo=false para ignorar um item.",
   "softwares": [
     {
-      "nome": "Microsoft Word",
+      "nome": "Microsoft Office",
       "categoria": "Produtividade",
       "ativo": true,
       "caminhos": [
         "C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE",
         "C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\WINWORD.EXE"
-      ]
-    },
-    {
-      "nome": "Microsoft Excel",
-      "categoria": "Produtividade",
-      "ativo": true,
-      "caminhos": [
-        "C:\\Program Files\\Microsoft Office\\root\\Office16\\EXCEL.EXE",
-        "C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\EXCEL.EXE"
-      ]
-    },
-    {
-      "nome": "Microsoft Outlook",
-      "categoria": "Produtividade",
-      "ativo": true,
-      "caminhos": [
-        "C:\\Program Files\\Microsoft Office\\root\\Office16\\OUTLOOK.EXE",
-        "C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\OUTLOOK.EXE"
-      ]
-    },
-    {
-      "nome": "Microsoft PowerPoint",
-      "categoria": "Produtividade",
-      "ativo": true,
-      "caminhos": [
-        "C:\\Program Files\\Microsoft Office\\root\\Office16\\POWERPNT.EXE",
-        "C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\POWERPNT.EXE"
       ]
     },
     {
