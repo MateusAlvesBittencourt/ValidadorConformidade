@@ -1,8 +1,8 @@
 {
   "versao": 1,
   "ordem": 1,
-  "codigo": "living",
-  "laboratorio": "Living",
+  "codigo": "predio_15A_living",
+  "laboratorio": "Predio 15A - Living",
   "descricao": "Ambiente Living",
   "observacao": "Edite somente este arquivo para alterar a lista do laboratório. Use ativo=false para ignorar um item.",
   "softwares": [

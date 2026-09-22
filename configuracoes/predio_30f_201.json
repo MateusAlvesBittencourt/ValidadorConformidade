@@ -2,7 +2,7 @@
   "versao": 1,
   "ordem": 5,
   "codigo": "30f_201",
-  "laboratorio": "Prédio 30F — Sala 201",
+  "laboratorio": "Prédio 30F - Sala 201",
   "descricao": "Laboratório 201 do Prédio 30F",
   "observacao": "Edite somente este arquivo para alterar a lista do laboratório. Use ativo=false para ignorar um item.",
   "softwares": [

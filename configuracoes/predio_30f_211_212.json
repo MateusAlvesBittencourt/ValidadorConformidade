@@ -2,7 +2,7 @@
   "versao": 1,
   "ordem": 6,
   "codigo": "30f_211_212",
-  "laboratorio": "Prédio 30F — Salas 211 e 212",
+  "laboratorio": "Prédio 30F - Salas 211 e 212",
   "descricao": "Laboratórios 211 e 212 do Prédio 30F",
   "observacao": "Edite somente este arquivo para alterar a lista do laboratório. Use ativo=false para ignorar um item.",
   "softwares": [

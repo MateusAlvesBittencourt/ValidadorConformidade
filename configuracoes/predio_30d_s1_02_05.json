@@ -2,7 +2,7 @@
   "versao": 1,
   "ordem": 4,
   "codigo": "30d_s1_02_05",
-  "laboratorio": "Prédio 30D — Salas S1.02 a S1.05",
+  "laboratorio": "Prédio 30D - Salas S1.02 a S1.05",
   "descricao": "Laboratórios S1.02 a S1.05 do Prédio 30D",
   "observacao": "Edite somente este arquivo para alterar a lista do laboratório. Use ativo=false para ignorar um item.",
   "softwares": [

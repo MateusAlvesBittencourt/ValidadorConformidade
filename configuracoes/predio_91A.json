@@ -1,9 +1,9 @@
 {
   "versao": 1,
   "ordem": 7,
-  "codigo": "AdmPadrao",
-  "laboratorio": "Administrativo — Padrão",
-  "descricao": "Perfil administrativo padrão",
+  "codigo": "AdmPadraoTI",
+  "laboratorio": "Predio_91A - TI",
+  "descricao": "Perfil administrativo para TI ",
   "observacao": "Edite somente este arquivo para alterar a lista do perfil. Use ativo=false para ignorar um item.",
   "softwares": [
     {
@@ -59,6 +59,14 @@
         "C:\\Program Files\\Java",
         "C:\\Program Files (x86)\\Java",
         "C:\\Program Files\\Eclipse Adoptium\\jre-*\\bin\\java.exe"
+      ]
+    },
+    {
+      "nome": "Harmony SASE",
+      "categoria": "Segurança VPN",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Perimeter 81\\Perimeter81.exe"
       ]
     },
     {

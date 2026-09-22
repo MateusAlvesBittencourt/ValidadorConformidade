@@ -2,7 +2,7 @@
   "versao": 1,
   "ordem": 2,
   "codigo": "30a_212_215",
-  "laboratorio": "Prédio 30A — Salas 212 e 215",
+  "laboratorio": "Prédio 30A - Salas 212 e 215",
   "descricao": "Laboratórios 212 e 215 do Prédio 30A",
   "observacao": "Edite somente este arquivo para alterar a lista do laboratório. Use ativo=false para ignorar um item.",
   "softwares": [
