@@ -1,0 +1,388 @@
+{
+  "versao": 1,
+  "ordem": 5,
+  "codigo": "30f_201",
+  "laboratorio": "Prédio 30F — Sala 201",
+  "descricao": "Laboratório 201 do Prédio 30F",
+  "observacao": "Edite somente este arquivo para alterar a lista do laboratório. Use ativo=false para ignorar um item.",
+  "softwares": [
+    {
+      "nome": "7-Zip",
+      "categoria": "Utilitário",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\7-Zip\\7zFM.exe"
+      ]
+    },
+    {
+      "nome": "Adobe Acrobat",
+      "categoria": "Documentos",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Adobe\\Acrobat DC\\Acrobat\\Acrobat.exe"
+      ]
+    },
+    {
+      "nome": "Adobe After Effects 2025",
+      "categoria": "Multimídia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Adobe\\Adobe After Effects 2025\\Support Files\\AfterFX.exe"
+      ]
+    },
+    {
+      "nome": "Adobe Audition 2025",
+      "categoria": "Multimídia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Adobe\\Adobe Audition 2025\\Adobe Audition.exe"
+      ]
+    },
+    {
+      "nome": "Adobe Bridge 2025",
+      "categoria": "Multimídia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Adobe\\Adobe Bridge 2025\\Adobe Bridge.exe"
+      ]
+    },
+    {
+      "nome": "Adobe Dreamweaver 2021",
+      "categoria": "Multimídia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Adobe\\Adobe Dreamweaver 2021\\Dreamweaver.exe"
+      ]
+    },
+    {
+      "nome": "Adobe Illustrator 2025",
+      "categoria": "Multimídia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Adobe\\Adobe Illustrator 2025\\Support Files\\Contents\\Windows\\Illustrator.exe"
+      ]
+    },
+    {
+      "nome": "Adobe InDesign 2025",
+      "categoria": "Multimídia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Adobe\\Adobe InDesign 2025\\InDesign.exe"
+      ]
+    },
+    {
+      "nome": "Adobe Media Encoder 2025",
+      "categoria": "Multimídia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Adobe\\Adobe Media Encoder 2025\\Adobe Media Encoder.exe"
+      ]
+    },
+    {
+      "nome": "Adobe Photoshop 2025",
+      "categoria": "Multimídia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Adobe\\Adobe Photoshop 2025\\Photoshop.exe"
+      ]
+    },
+    {
+      "nome": "Adobe Premiere Pro 2025",
+      "categoria": "Multimídia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Adobe\\Adobe Premiere Pro 2025\\Adobe Premiere Pro.exe"
+      ]
+    },
+    {
+      "nome": "Archicad 28",
+      "categoria": "CAD / BIM",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Graphisoft\\Archicad 28\\Archicad Starter.exe"
+      ]
+    },
+    {
+      "nome": "Autodesk 3ds Max 2025",
+      "categoria": "CAD / BIM",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Autodesk\\3ds Max 2025\\3dsmax.exe"
+      ]
+    },
+    {
+      "nome": "Autodesk AutoCAD 2025",
+      "categoria": "CAD / BIM",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Autodesk\\AutoCAD 2025\\acad.exe",
+        "C:\\Arquivos de Programas\\Autodesk\\AutoCAD 2025\\acad.exe"
+      ]
+    },
+    {
+      "nome": "Autodesk Inventor Professional 2025",
+      "categoria": "CAD / BIM",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Autodesk\\Inventor 2025\\Bin\\Inventor.exe"
+      ]
+    },
+    {
+      "nome": "Autodesk Navisworks Manage 2025",
+      "categoria": "CAD / BIM",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Autodesk\\Navisworks Manage 2025\\Roamer.exe"
+      ]
+    },
+    {
+      "nome": "Autodesk Revit 2025",
+      "categoria": "CAD / BIM",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Autodesk\\Revit 2025\\Revit.exe"
+      ]
+    },
+    {
+      "nome": "DIALux Evo",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\DIAL GmbH\\DIALux\\DIALux.exe"
+      ]
+    },
+    {
+      "nome": "Firefox",
+      "categoria": "Navegador",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Mozilla Firefox\\firefox.exe",
+        "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe"
+      ]
+    },
+    {
+      "nome": "Google Chrome",
+      "categoria": "Navegador",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+        "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
+      ]
+    },
+    {
+      "nome": "Grasshopper for Rhinoceros (instalar)",
+      "categoria": "Complemento",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files (x86)\\Rhinoceros 5\\System\\x64\\grasshopper_0.9.76.0.rhi"
+      ]
+    },
+    {
+      "nome": "Inkscape",
+      "categoria": "Multimídia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Inkscape\\bin\\inkscape.exe"
+      ]
+    },
+    {
+      "nome": "Java",
+      "categoria": "Desenvolvimento",
+      "ativo": true,
+      "caminhos": [
+        "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Java\\Verificar Atualizações.lnk",
+        "C:\\Program Files\\Java\\jre*\\bin\\java.exe",
+        "C:\\Program Files\\Eclipse Adoptium\\jre-*\\bin\\java.exe"
+      ]
+    },
+    {
+      "nome": "LayOut 2024 (Sketchup Pack)",
+      "categoria": "CAD / BIM",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\SketchUp\\SketchUp 2024\\LayOut\\LayOut.exe"
+      ]
+    },
+    {
+      "nome": "Microsoft Office 2019",
+      "categoria": "Produtividade",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Microsoft Office\\root\\Office16\\EXCEL.EXE",
+        "C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\EXCEL.EXE"
+      ]
+    },
+    {
+      "nome": "Microsoft Visio",
+      "categoria": "Produtividade",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Microsoft Office\\root\\Office16\\VISIO.EXE",
+        "C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\VISIO.EXE"
+      ]
+    },
+    {
+      "nome": "Notepad++",
+      "categoria": "Utilitário",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Notepad++\\notepad++.exe",
+        "C:\\Program Files (x86)\\Notepad++\\notepad++.exe"
+      ]
+    },
+    {
+      "nome": "QGIS",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\QGIS *\\bin\\qgis*-bin.exe",
+        "C:\\Program Files (x86)\\QGIS *\\bin\\qgis*-bin.exe"
+      ]
+    },
+    {
+      "nome": "QGIS Plugin SCP",
+      "categoria": "Complemento",
+      "ativo": true,
+      "caminhos": [
+        "%APPDATA%\\QGIS\\QGIS3\\profiles\\default\\python\\plugins\\SemiAutomaticClassificationPlugin",
+        "C:\\Users\\Default\\AppData\\Roaming\\QGIS\\QGIS3\\profiles\\default\\python\\plugins\\SemiAutomaticClassificationPlugin"
+      ]
+    },
+    {
+      "nome": "QGIS - OpenSans",
+      "categoria": "Fonte",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Windows\\Fonts\\OpenSans*.ttf"
+      ]
+    },
+    {
+      "nome": "Rhinoceros 5 (64-bit)",
+      "categoria": "CAD / BIM",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files (x86)\\Rhinoceros 5\\System\\Rhino.exe"
+      ]
+    },
+    {
+      "nome": "Scilab-2024.0.0 (64-bit) Desktop",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\scilab-2024.0.0\\bin\\WScilex-cli.exe"
+      ]
+    },
+    {
+      "nome": "SketchUp 2024 - Licenciamento",
+      "categoria": "Licença",
+      "ativo": true,
+      "caminhos": [
+        "C:\\ProgramData\\SketchUp\\SketchUp 2024\\SketchUp.lic"
+      ]
+    },
+    {
+      "nome": "SketchUp 2024",
+      "categoria": "CAD / BIM",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\SketchUp\\SketchUp 2024\\SketchUp.exe"
+      ]
+    },
+    {
+      "nome": "Style Builder (Sketchup Pack)",
+      "categoria": "CAD / BIM",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\SketchUp\\SketchUp 2024\\Style Builder\\Style Builder.exe"
+      ]
+    },
+    {
+      "nome": "SOLIDWORKS 2023",
+      "categoria": "CAD / BIM",
+      "ativo": true,
+      "caminhos": [
+        "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\SOLIDWORKS 2023\\SOLIDWORKS 2023.lnk"
+      ]
+    },
+    {
+      "nome": "SOLIDWORKS Composer 2023",
+      "categoria": "CAD / BIM",
+      "ativo": true,
+      "caminhos": [
+        "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\SOLIDWORKS 2023\\SOLIDWORKS Composer 2023\\SOLIDWORKS Composer 2023.lnk"
+      ]
+    },
+    {
+      "nome": "SOLIDWORKS Composer Player 2023",
+      "categoria": "CAD / BIM",
+      "ativo": true,
+      "caminhos": [
+        "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\SOLIDWORKS 2023\\SOLIDWORKS Composer 2023\\SOLIDWORKS Composer Player 2023.lnk"
+      ]
+    },
+    {
+      "nome": "SOLIDWORKS Electrical 2023",
+      "categoria": "CAD / BIM",
+      "ativo": true,
+      "caminhos": [
+        "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\SOLIDWORKS 2023\\SOLIDWORKS Electrical.lnk"
+      ]
+    },
+    {
+      "nome": "SOLIDWORKS Manage 2023",
+      "categoria": "CAD / BIM",
+      "ativo": true,
+      "caminhos": [
+        "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\SOLIDWORKS 2023\\SOLIDWORKS Manage 2023.lnk"
+      ]
+    },
+    {
+      "nome": "SOLIDWORKS Visualize 2023",
+      "categoria": "CAD / BIM",
+      "ativo": true,
+      "caminhos": [
+        "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\SOLIDWORKS 2023\\SOLIDWORKS Visualize 2023.lnk"
+      ]
+    },
+    {
+      "nome": "eDrawings 2023 x64 Edition",
+      "categoria": "CAD / BIM",
+      "ativo": true,
+      "caminhos": [
+        "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\SOLIDWORKS 2023\\eDrawings 2023 x64 Edition.lnk"
+      ]
+    },
+    {
+      "nome": "TQS",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\TQSW\\EXEC\\X64\\TQSLOADER.EXE"
+      ]
+    },
+    {
+      "nome": "Twinmotion e plugins — pós-instalação",
+      "categoria": "Complemento",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Epic Games\\Twinmotion2025.1"
+      ]
+    },
+    {
+      "nome": "Trend Micro VOneAgent",
+      "categoria": "Segurança",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files (x86)\\Trend Micro\\Endpoint Basecamp\\modules\\vom\\modules\\UiBridgeModule\\VOneAgentConsole\\VOneAgentConsoleTray.exe"
+      ]
+    },
+    {
+      "nome": "Cliente SCCM",
+      "categoria": "Gerenciamento",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Windows\\CCM\\CcmExec.exe"
+      ]
+    }
+  ]
+}

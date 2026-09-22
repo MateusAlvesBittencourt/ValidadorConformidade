@@ -1,0 +1,471 @@
+{
+  "versao": 1,
+  "ordem": 2,
+  "codigo": "30a_212_215",
+  "laboratorio": "Prédio 30A — Salas 212 e 215",
+  "descricao": "Laboratórios 212 e 215 do Prédio 30A",
+  "observacao": "Edite somente este arquivo para alterar a lista do laboratório. Use ativo=false para ignorar um item.",
+  "softwares": [
+    {
+      "nome": "7-Zip",
+      "categoria": "Utilitário",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\7-Zip\\7zFM.exe"
+      ]
+    },
+    {
+      "nome": "Adobe Acrobat Reader",
+      "categoria": "Documentos",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Adobe\\Acrobat DC\\Acrobat\\Acrobat.exe",
+        "C:\\Program Files (x86)\\Adobe\\Acrobat Reader DC\\Reader\\AcroRd32.exe"
+      ]
+    },
+    {
+      "nome": "Arduino IDE",
+      "categoria": "Desenvolvimento",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Arduino IDE\\Arduino IDE.exe",
+        "C:\\Program Files (x86)\\Arduino\\arduino.exe"
+      ]
+    },
+    {
+      "nome": "Aspen HYSYS V12.1",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\AspenTech\\Aspen HYSYS V12.1\\AspenHysys.exe"
+      ]
+    },
+    {
+      "nome": "Aspen Plus V12.1",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\AspenTech\\Aspen Plus V12.1\\GUI\\Xeq\\AspenPlus.exe"
+      ]
+    },
+    {
+      "nome": "Autodesk 3DS Max 2025",
+      "categoria": "CAD / BIM",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Autodesk\\3ds Max 2025\\3dsmax.exe"
+      ]
+    },
+    {
+      "nome": "Autodesk AutoCAD 2025",
+      "categoria": "CAD / BIM",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Autodesk\\AutoCAD 2025\\acad.exe",
+        "C:\\Arquivos de Programas\\Autodesk\\AutoCAD 2025\\acad.exe"
+      ]
+    },
+    {
+      "nome": "Autodesk Inventor Professional 2025",
+      "categoria": "CAD / BIM",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Autodesk\\Inventor 2025\\Bin\\Inventor.exe"
+      ]
+    },
+    {
+      "nome": "Autodesk Revit 2025",
+      "categoria": "CAD / BIM",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Autodesk\\Revit 2025\\Revit.exe"
+      ]
+    },
+    {
+      "nome": "CODESYS V3.5.11",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files (x86)\\Eaton\\XSOFT-CODESYS-3\\CODESYS\\Common\\XSoft3.exe"
+      ]
+    },
+    {
+      "nome": "Coolpack",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Coolpack\\CoolPack.exe"
+      ]
+    },
+    {
+      "nome": "DIALux evo",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\DIAL GmbH\\DIALux\\DIALux.exe"
+      ]
+    },
+    {
+      "nome": "DigitalWorks",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Digital Works\\DigitalWorks.exe"
+      ]
+    },
+    {
+      "nome": "Eletrobras CEPEL",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Cepel\\Anafas\\7.2.7\\Anafas.exe"
+      ]
+    },
+    {
+      "nome": "EMSO",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files (x86)\\EMSO\\bin\\emso.exe"
+      ]
+    },
+    {
+      "nome": "EnergyPlus",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\EnergyPlusV24-1-0\\EP-Launch.exe"
+      ]
+    },
+    {
+      "nome": "ETAP 22.5.0",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\ETAP 2250\\etaps64.exe"
+      ]
+    },
+    {
+      "nome": "Firefox",
+      "categoria": "Navegador",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Mozilla Firefox\\firefox.exe",
+        "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe"
+      ]
+    },
+    {
+      "nome": "FTool",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\FTool\\Ftool.exe"
+      ]
+    },
+    {
+      "nome": "GAMS Studio",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\GAMS\\48\\studio\\studio.exe"
+      ]
+    },
+    {
+      "nome": "GNU Octave (CLI)",
+      "categoria": "Desenvolvimento",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\GNU Octave\\Octave-9.1.0\\octave-launch.exe"
+      ]
+    },
+    {
+      "nome": "Google Chrome",
+      "categoria": "Navegador",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+        "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
+      ]
+    },
+    {
+      "nome": "ImageJ",
+      "categoria": "Multimídia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\ImageJ\\ImageJ.exe"
+      ]
+    },
+    {
+      "nome": "Inkscape",
+      "categoria": "Multimídia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Inkscape\\bin\\inkscape.exe"
+      ]
+    },
+    {
+      "nome": "Java",
+      "categoria": "Desenvolvimento",
+      "ativo": true,
+      "caminhos": [
+        "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Java\\Verificar Atualizações.lnk",
+        "C:\\Program Files\\Java\\jre*\\bin\\java.exe",
+        "C:\\Program Files\\Eclipse Adoptium\\jre-*\\bin\\java.exe"
+      ]
+    },
+    {
+      "nome": "Laboratorio de Reatores",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Laboratorio de Reatores\\Laboratorio de Reatores.exe"
+      ]
+    },
+    {
+      "nome": "MATLAB",
+      "categoria": "Desenvolvimento",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\MATLAB\\R2012b\\bin\\matlab.exe"
+      ]
+    },
+    {
+      "nome": "Mendeley Desktop",
+      "categoria": "Produtividade",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files (x86)\\Mendeley Desktop\\MendeleyDesktop.exe"
+      ]
+    },
+    {
+      "nome": "Microsoft Office",
+      "categoria": "Produtividade",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Microsoft Office\\root\\Office16\\POWERPNT.EXE",
+        "C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\POWERPNT.EXE"
+      ]
+    },
+    {
+      "nome": "Microsoft Project",
+      "categoria": "Produtividade",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Microsoft Office\\root\\Office16\\WINPROJ.EXE",
+        "C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\WINPROJ.EXE"
+      ]
+    },
+    {
+      "nome": "Microsoft Visio",
+      "categoria": "Produtividade",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Microsoft Office\\root\\Office16\\VISIO.EXE",
+        "C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\VISIO.EXE"
+      ]
+    },
+    {
+      "nome": "Minitab 17",
+      "categoria": "Análise de dados",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files (x86)\\Minitab\\Minitab 17\\Mtb.exe"
+      ]
+    },
+    {
+      "nome": "Minitab 17 - Licença",
+      "categoria": "Licença",
+      "ativo": true,
+      "caminhos": [
+        "C:\\ProgramData\\Minitab\\MultiUserLicense.ini"
+      ]
+    },
+    {
+      "nome": "Notepad++",
+      "categoria": "Utilitário",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Notepad++\\notepad++.exe",
+        "C:\\Program Files (x86)\\Notepad++\\notepad++.exe"
+      ]
+    },
+    {
+      "nome": "OpenDSS",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\OpenDSS\\x64\\OpenDSS.exe"
+      ]
+    },
+    {
+      "nome": "Polymath",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files (x86)\\Polymath Software\\Polymath Educational\\Polymath.exe"
+      ]
+    },
+    {
+      "nome": "Power World",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\PowerWorld\\Simulator Education-Evalution 23\\pwrworld.exe"
+      ]
+    },
+    {
+      "nome": "PSIM",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Powersim\\PSIM12.0.3_Demo\\PSIM.exe"
+      ]
+    },
+    {
+      "nome": "PTC Creo",
+      "categoria": "CAD / BIM",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\PTC\\Creo 7.0.1.0\\Layout\\bin\\layout.exe"
+      ]
+    },
+    {
+      "nome": "QGIS",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\QGIS *\\bin\\qgis*-bin.exe",
+        "C:\\Program Files (x86)\\QGIS *\\bin\\qgis*-bin.exe"
+      ]
+    },
+    {
+      "nome": "Reatores Quimicos",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Reatores Quimicos\\Ecology\\Ecology.exe"
+      ]
+    },
+    {
+      "nome": "Scilab",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\scilab-2024.0.0\\bin\\WScilex.exe"
+      ]
+    },
+    {
+      "nome": "SOLIDWORKS 2023",
+      "categoria": "CAD / BIM",
+      "ativo": true,
+      "caminhos": [
+        "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\SOLIDWORKS 2023\\SOLIDWORKS 2023.lnk"
+      ]
+    },
+    {
+      "nome": "SOLIDWORKS Composer 2023",
+      "categoria": "CAD / BIM",
+      "ativo": true,
+      "caminhos": [
+        "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\SOLIDWORKS 2023\\SOLIDWORKS Composer 2023\\SOLIDWORKS Composer 2023.lnk"
+      ]
+    },
+    {
+      "nome": "SOLIDWORKS Composer Player 2023",
+      "categoria": "CAD / BIM",
+      "ativo": true,
+      "caminhos": [
+        "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\SOLIDWORKS 2023\\SOLIDWORKS Composer 2023\\SOLIDWORKS Composer Player 2023.lnk"
+      ]
+    },
+    {
+      "nome": "SOLIDWORKS Electrical 2023",
+      "categoria": "CAD / BIM",
+      "ativo": true,
+      "caminhos": [
+        "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\SOLIDWORKS 2023\\SOLIDWORKS Electrical.lnk"
+      ]
+    },
+    {
+      "nome": "SOLIDWORKS Manage 2023",
+      "categoria": "CAD / BIM",
+      "ativo": true,
+      "caminhos": [
+        "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\SOLIDWORKS 2023\\SOLIDWORKS Manage 2023.lnk"
+      ]
+    },
+    {
+      "nome": "SOLIDWORKS Visualize 2023",
+      "categoria": "CAD / BIM",
+      "ativo": true,
+      "caminhos": [
+        "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\SOLIDWORKS 2023\\SOLIDWORKS Visualize 2023.lnk"
+      ]
+    },
+    {
+      "nome": "SPSS Statistics 17.0",
+      "categoria": "Análise de dados",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files (x86)\\SPSSInc\\Statistics17\\statistics.exe"
+      ]
+    },
+    {
+      "nome": "VirtualBox",
+      "categoria": "Utilitário",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Oracle\\VirtualBox\\VirtualBox.exe"
+      ]
+    },
+    {
+      "nome": "VRTherm",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files (x86)\\EMSO\\vrtherm\\vrtherm.exe"
+      ]
+    },
+    {
+      "nome": "QGIS - OpenSans",
+      "categoria": "Fonte",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Windows\\Fonts\\OpenSans*.ttf"
+      ]
+    },
+    {
+      "nome": "QGIS - Plugin SCP",
+      "categoria": "Complemento",
+      "ativo": true,
+      "caminhos": [
+        "%APPDATA%\\QGIS\\QGIS3\\profiles\\default\\python\\plugins\\SemiAutomaticClassificationPlugin",
+        "C:\\Users\\Default\\AppData\\Roaming\\QGIS\\QGIS3\\profiles\\default\\python\\plugins\\SemiAutomaticClassificationPlugin"
+      ]
+    },
+    {
+      "nome": "Proteus",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files (x86)\\Labcenter Electronics\\Proteus 7 Professional\\BIN\\ISIS.EXE"
+      ]
+    },
+    {
+      "nome": "Trend Micro VOneAgent",
+      "categoria": "Segurança",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files (x86)\\Trend Micro\\Endpoint Basecamp\\modules\\vom\\modules\\UiBridgeModule\\VOneAgentConsole\\VOneAgentConsoleTray.exe"
+      ]
+    },
+    {
+      "nome": "Cliente SCCM",
+      "categoria": "Gerenciamento",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Windows\\CCM\\CcmExec.exe"
+      ]
+    }
+  ]
+}

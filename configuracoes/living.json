@@ -1,0 +1,194 @@
+{
+  "versao": 1,
+  "ordem": 1,
+  "codigo": "living",
+  "laboratorio": "Living",
+  "descricao": "Ambiente Living",
+  "observacao": "Edite somente este arquivo para alterar a lista do laboratório. Use ativo=false para ignorar um item.",
+  "softwares": [
+    {
+      "nome": "Audacity",
+      "categoria": "Multimídia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Audacity\\Audacity.exe",
+        "C:\\Program Files (x86)\\Audacity\\Audacity.exe"
+      ]
+    },
+    {
+      "nome": "Google Chrome",
+      "categoria": "Navegador",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+        "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
+      ]
+    },
+    {
+      "nome": "Java",
+      "categoria": "Desenvolvimento",
+      "ativo": true,
+      "caminhos": [
+        "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Java",
+        "C:\\Program Files\\Java\\jre*\\bin\\java.exe",
+        "C:\\Program Files\\Eclipse Adoptium\\jre-*\\bin\\java.exe"
+      ]
+    },
+    {
+      "nome": "Microsoft Office 2019",
+      "categoria": "Produtividade",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Microsoft Office\\root\\Office16\\EXCEL.EXE",
+        "C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\EXCEL.EXE"
+      ]
+    },
+    {
+      "nome": "Bizagi Modeler",
+      "categoria": "Modelagem",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Bizagi\\Bizagi Modeler\\BizagiModeler.exe",
+        "C:\\Program Files (x86)\\Bizagi\\Bizagi Modeler\\BizagiModeler.exe"
+      ]
+    },
+    {
+      "nome": "Code::Blocks",
+      "categoria": "Desenvolvimento",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\CodeBlocks\\codeblocks.exe",
+        "C:\\Program Files (x86)\\CodeBlocks\\codeblocks.exe"
+      ]
+    },
+    {
+      "nome": "Dosvox",
+      "categoria": "Acessibilidade",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Winvox\\dosvox.exe"
+      ]
+    },
+    {
+      "nome": "QGIS",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\QGIS *\\bin\\qgis*-bin.exe",
+        "C:\\Program Files (x86)\\QGIS *\\bin\\qgis*-bin.exe"
+      ]
+    },
+    {
+      "nome": "R for Windows",
+      "categoria": "Desenvolvimento",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\R\\R-*\\bin\\R.exe",
+        "C:\\Program Files\\R"
+      ]
+    },
+    {
+      "nome": "RStudio",
+      "categoria": "Desenvolvimento",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\RStudio\\rstudio.exe",
+        "C:\\Program Files\\RStudio\\resources\\app\\bin\\rstudio.exe"
+      ]
+    },
+    {
+      "nome": "Docker Desktop",
+      "categoria": "Desenvolvimento",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Docker\\Docker\\Docker Desktop.exe"
+      ]
+    },
+    {
+      "nome": "Eclipse",
+      "categoria": "Desenvolvimento",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Eclipse\\eclipse.exe",
+        "%USERPROFILE%\\eclipse\\*\\eclipse\\eclipse.exe"
+      ]
+    },
+    {
+      "nome": "Visual Studio Code",
+      "categoria": "Desenvolvimento",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Microsoft VS Code\\Code.exe",
+        "%LOCALAPPDATA%\\Programs\\Microsoft VS Code\\Code.exe",
+        "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Visual Studio Code\\Visual Studio Code.lnk"
+      ]
+    },
+    {
+      "nome": "VLC",
+      "categoria": "Multimídia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\VideoLAN\\VLC\\vlc.exe",
+        "C:\\Program Files (x86)\\VideoLAN\\VLC\\vlc.exe"
+      ]
+    },
+    {
+      "nome": "Windows Subsystem for Linux",
+      "categoria": "Sistema",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Windows\\System32\\wsl.exe"
+      ]
+    },
+    {
+      "nome": "FTool",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\FTool\\Ftool.exe"
+      ]
+    },
+    {
+      "nome": "DB Browser for SQLite",
+      "categoria": "Desenvolvimento",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\DB Browser for SQLite\\DB Browser for SQLite.exe",
+        "C:\\Program Files (x86)\\DB Browser for SQLite\\DB Browser for SQLite.exe"
+      ]
+    },
+    {
+      "nome": "JDK",
+      "categoria": "Desenvolvimento",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Java\\jdk-*\\bin\\java.exe",
+        "C:\\Program Files\\Eclipse Adoptium\\jdk-*\\bin\\java.exe"
+      ]
+    },
+    {
+      "nome": "QGIS - OpenSans",
+      "categoria": "Fonte",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Windows\\Fonts\\OpenSans*.ttf"
+      ]
+    },
+    {
+      "nome": "Trend Micro VOneAgent",
+      "categoria": "Segurança",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files (x86)\\Trend Micro\\Endpoint Basecamp\\modules\\vom\\modules\\UiBridgeModule\\VOneAgentConsole\\VOneAgentConsoleTray.exe"
+      ]
+    },
+    {
+      "nome": "Cliente SCCM",
+      "categoria": "Gerenciamento",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Windows\\CCM\\CcmExec.exe"
+      ]
+    }
+  ]
+}

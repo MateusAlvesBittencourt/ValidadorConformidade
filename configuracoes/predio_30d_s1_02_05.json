@@ -1,0 +1,250 @@
+{
+  "versao": 1,
+  "ordem": 4,
+  "codigo": "30d_s1_02_05",
+  "laboratorio": "Prédio 30D — Salas S1.02 a S1.05",
+  "descricao": "Laboratórios S1.02 a S1.05 do Prédio 30D",
+  "observacao": "Edite somente este arquivo para alterar a lista do laboratório. Use ativo=false para ignorar um item.",
+  "softwares": [
+    {
+      "nome": "Audacity",
+      "categoria": "Multimídia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Audacity\\Audacity.exe",
+        "C:\\Program Files (x86)\\Audacity\\Audacity.exe"
+      ]
+    },
+    {
+      "nome": "Arduino IDE",
+      "categoria": "Desenvolvimento",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files (x86)\\Arduino\\arduino.exe",
+        "C:\\Program Files\\Arduino IDE\\Arduino IDE.exe"
+      ]
+    },
+    {
+      "nome": "Autodesk Eagle",
+      "categoria": "CAD / BIM",
+      "ativo": true,
+      "caminhos": [
+        "C:\\EAGLE 9.6.2\\eagle.exe"
+      ]
+    },
+    {
+      "nome": "CMake",
+      "categoria": "Desenvolvimento",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\CMake\\bin\\cmake-gui.exe"
+      ]
+    },
+    {
+      "nome": "Docker Desktop",
+      "categoria": "Desenvolvimento",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Docker\\Docker\\Docker Desktop.exe"
+      ]
+    },
+    {
+      "nome": "Git",
+      "categoria": "Desenvolvimento",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Git\\git-bash.exe"
+      ]
+    },
+    {
+      "nome": "Google Chrome",
+      "categoria": "Navegador",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+        "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
+      ]
+    },
+    {
+      "nome": "Java",
+      "categoria": "Desenvolvimento",
+      "ativo": true,
+      "caminhos": [
+        "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Java\\Verificar Atualizações.lnk",
+        "C:\\Program Files\\Java\\jre*\\bin\\java.exe",
+        "C:\\Program Files\\Eclipse Adoptium\\jre-*\\bin\\java.exe"
+      ]
+    },
+    {
+      "nome": "KiCad",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\KiCad\\8.0\\bin\\kicad.exe"
+      ]
+    },
+    {
+      "nome": "Lego",
+      "categoria": "Robótica",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files (x86)\\LEGO Software\\LEGO MINDSTORMS Edu NXT\\MINDSTORMSNXT.exe"
+      ]
+    },
+    {
+      "nome": "LTSpice",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\ADI\\LTspice\\LTspice.exe"
+      ]
+    },
+    {
+      "nome": "Matlab",
+      "categoria": "Desenvolvimento",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\MATLAB\\R2012b\\bin\\matlab.exe"
+      ]
+    },
+    {
+      "nome": "Microsoft Office 2019",
+      "categoria": "Produtividade",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Microsoft Office\\root\\Office16\\EXCEL.EXE",
+        "C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\EXCEL.EXE"
+      ]
+    },
+    {
+      "nome": "Microsoft SDK 7.1",
+      "categoria": "Desenvolvimento",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Microsoft SDKs\\Windows\\v7.1\\Bin\\Bind.Exe"
+      ]
+    },
+    {
+      "nome": "MinGW",
+      "categoria": "Desenvolvimento",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\MinGW\\bin\\gcc.exe"
+      ]
+    },
+    {
+      "nome": "NodeJS",
+      "categoria": "Desenvolvimento",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\nodejs\\node.exe"
+      ]
+    },
+    {
+      "nome": "Notepad++",
+      "categoria": "Utilitário",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Notepad++\\notepad++.exe",
+        "C:\\Program Files (x86)\\Notepad++\\notepad++.exe"
+      ]
+    },
+    {
+      "nome": "OpenDSS",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\OpenDSS\\x64\\OpenDSS.exe"
+      ]
+    },
+    {
+      "nome": "OrCAD",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Cadence\\SPB_16.5\\tools\\capture\\Capture.exe"
+      ]
+    },
+    {
+      "nome": "Oracle VM VirtualBox",
+      "categoria": "Utilitário",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Oracle\\VirtualBox\\VirtualBox.exe"
+      ]
+    },
+    {
+      "nome": "Proteus",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files (x86)\\Proteus 7\\x86\\Labcenter Electronics\\Proteus 7 Professional\\BIN\\ISIS.EXE"
+      ]
+    },
+    {
+      "nome": "PSIM 12.0",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Powersim\\PSIM12.0.3_Demo\\PSIM.exe"
+      ]
+    },
+    {
+      "nome": "Python 3.9.7",
+      "categoria": "Desenvolvimento",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Python39\\python.exe"
+      ]
+    },
+    {
+      "nome": "STM32CubeIDE",
+      "categoria": "Desenvolvimento",
+      "ativo": true,
+      "caminhos": [
+        "C:\\ST\\STM32CubeIDE_1.10.1\\STM32CubeIDE\\stm32cubeide.exe"
+      ]
+    },
+    {
+      "nome": "TINA-TI",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files (x86)\\Tina 9 - TI\\TINA.EXE"
+      ]
+    },
+    {
+      "nome": "Visual Studio Code",
+      "categoria": "Desenvolvimento",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Microsoft VS Code\\Code.exe",
+        "%LOCALAPPDATA%\\Programs\\Microsoft VS Code\\Code.exe"
+      ]
+    },
+    {
+      "nome": "Xilinx",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Xilinx\\14.7\\ISE_DS\\PlanAhead\\bin\\planAhead.bat"
+      ]
+    },
+    {
+      "nome": "Trend Micro VOneAgent",
+      "categoria": "Segurança",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files (x86)\\Trend Micro\\Endpoint Basecamp\\modules\\vom\\modules\\UiBridgeModule\\VOneAgentConsole\\VOneAgentConsoleTray.exe"
+      ]
+    },
+    {
+      "nome": "Cliente SCCM",
+      "categoria": "Gerenciamento",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Windows\\CCM\\CcmExec.exe"
+      ]
+    }
+  ]
+}
