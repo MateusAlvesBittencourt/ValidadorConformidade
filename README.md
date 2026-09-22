@@ -1,6 +1,6 @@
 # Validador de Conformidade de Laboratórios
 
-Aplicação desktop em Python e Tkinter para verificar a conformidade de computadores dos laboratórios. O programa valida os softwares esperados, o driver de vídeo e o endereço IPv4 principal do dispositivo.
+Aplicação desktop em Python e Tkinter para verificar a conformidade de computadores dos laboratórios. O programa valida os softwares esperados, o driver de vídeo, a ativação do Windows e o endereço IPv4 principal do dispositivo.
 
 ## Funcionalidades
 
@@ -8,6 +8,7 @@ Aplicação desktop em Python e Tkinter para verificar a conformidade de computa
 - perfis independentes em arquivos JSON;
 - validação de softwares por um ou mais caminhos possíveis;
 - verificação do driver de vídeo do fabricante;
+- verificação do estado de ativação do Windows, incluindo ambientes KMS;
 - identificação do IPv4 principal;
 - resumo de itens conformes e não conformes;
 - temas claro e escuro;

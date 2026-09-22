@@ -60,11 +60,17 @@ class Laboratorio:
 
 
 NOME_DRIVER_VIDEO: Final = "Driver de vídeo"
+NOME_ATIVACAO_WINDOWS: Final = "Ativação do Windows"
 TEXTO_SELECIONE_LABORATORIO: Final = "Selecione um laboratório..."
 VALIDACAO_DRIVER_VIDEO: Final = Software(
     nome=NOME_DRIVER_VIDEO,
     categoria="Hardware",
     caminhos=("Driver do fabricante (Intel, AMD ou NVIDIA)",),
+)
+VALIDACAO_ATIVACAO_WINDOWS: Final = Software(
+    nome=NOME_ATIVACAO_WINDOWS,
+    categoria="Sistema operacional",
+    caminhos=("Windows ativado e licenciado",),
 )
 
 
@@ -177,9 +183,13 @@ def _carregar_laboratorio(arquivo: Path) -> Laboratorio:
 
         nome = nome.strip()
         chave_nome = nome.casefold()
-        if chave_nome == NOME_DRIVER_VIDEO.casefold():
+        nomes_reservados = {
+            NOME_DRIVER_VIDEO.casefold(),
+            NOME_ATIVACAO_WINDOWS.casefold(),
+        }
+        if chave_nome in nomes_reservados:
             raise ErroConfiguracao(
-                f'O nome "{NOME_DRIVER_VIDEO}" é reservado pelo validador.'
+                f'O nome "{nome}" é reservado pelo validador.'
             )
         if chave_nome in nomes_utilizados:
             raise ErroConfiguracao(f'O software "{nome}" está duplicado.')
@@ -430,9 +440,112 @@ def verificar_driver_video() -> tuple[str, str]:
     return "conforme", "; ".join(detalhes)
 
 
+def verificar_ativacao_windows() -> tuple[str, str]:
+    """Verifica o estado atual da licença do Windows por um código numérico."""
+    if platform.system() != "Windows":
+        return "erro", "Verificação disponível somente no Windows"
+
+    comando = (
+        "[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; "
+        "$ErrorActionPreference = 'Stop'; "
+        "$produtos = @(Get-CimInstance -ClassName SoftwareLicensingProduct "
+        "| Where-Object { $_.ApplicationID -eq "
+        "'55c92734-d682-4d71-983e-d6ec3f16059f' -and $_.PartialProductKey } "
+        "| Select-Object Name, Description, LicenseStatus, "
+        "ProductKeyChannel, GracePeriodRemaining); "
+        "ConvertTo-Json -InputObject $produtos -Compress -Depth 3"
+    )
+    argumentos = [
+        "powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-NonInteractive",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        comando,
+    ]
+    opcoes: dict[str, object] = {
+        "capture_output": True,
+        "text": True,
+        "encoding": "utf-8",
+        "errors": "replace",
+        "timeout": 20,
+        "check": False,
+    }
+    if hasattr(subprocess, "CREATE_NO_WINDOW"):
+        opcoes["creationflags"] = subprocess.CREATE_NO_WINDOW
+
+    try:
+        processo = subprocess.run(argumentos, **opcoes)
+    except (OSError, subprocess.SubprocessError):
+        return "erro", "Não foi possível consultar a ativação do Windows"
+
+    if processo.returncode != 0 or not processo.stdout.strip():
+        return "erro", "Não foi possível consultar a ativação do Windows"
+
+    try:
+        dados = json.loads(processo.stdout.lstrip("\ufeff").strip())
+    except (json.JSONDecodeError, TypeError):
+        return "erro", "Resposta inválida ao consultar a ativação do Windows"
+
+    if isinstance(dados, dict):
+        produtos = [dados]
+    elif isinstance(dados, list):
+        produtos = [item for item in dados if isinstance(item, dict)]
+    else:
+        produtos = []
+
+    if not produtos:
+        return "falha", "Licença do Windows não identificada"
+
+    produtos_com_status: list[tuple[dict[str, object], int]] = []
+    for produto in produtos:
+        try:
+            status = int(produto.get("LicenseStatus", -1))
+        except (TypeError, ValueError):
+            status = -1
+        produtos_com_status.append((produto, status))
+
+    for produto, status in produtos_com_status:
+        if status != 1:
+            continue
+        nome = str(
+            produto.get("Name")
+            or produto.get("Description")
+            or "Windows"
+        ).strip()
+        canal = str(produto.get("ProductKeyChannel") or "").strip()
+        detalhes = f"{nome} — Ativado"
+        if canal:
+            detalhes += f" — canal {canal}"
+        return "conforme", detalhes
+
+    descricoes_status = {
+        0: "Windows não licenciado",
+        2: "Windows em período de tolerância inicial",
+        3: "Windows em período de tolerância adicional",
+        4: "Windows em período de tolerância por licença não genuína",
+        5: "Windows em modo de notificação",
+        6: "Windows em período de tolerância estendido",
+    }
+    status_identificado = next(
+        (status for _produto, status in produtos_com_status if status in descricoes_status),
+        -1,
+    )
+    return "falha", descricoes_status.get(
+        status_identificado,
+        "Windows não ativado ou estado da licença desconhecido",
+    )
+
+
 def itens_validacao(laboratorio: Laboratorio) -> tuple[Software, ...]:
     """Inclui as verificações universais antes dos softwares do laboratório."""
-    return (VALIDACAO_DRIVER_VIDEO, *laboratorio.softwares)
+    return (
+        VALIDACAO_DRIVER_VIDEO,
+        VALIDACAO_ATIVACAO_WINDOWS,
+        *laboratorio.softwares,
+    )
 
 
 def obter_ipv4_principal() -> str:
@@ -1312,6 +1425,8 @@ class ValidadorConformidade(tk.Tk):
         for software in softwares:
             if software.nome == NOME_DRIVER_VIDEO:
                 estado, caminho_exibido = verificar_driver_video()
+            elif software.nome == NOME_ATIVACAO_WINDOWS:
+                estado, caminho_exibido = verificar_ativacao_windows()
             else:
                 caminho = localizar_software(software)
                 estado = "conforme" if caminho else "falha"
