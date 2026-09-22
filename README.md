@@ -8,7 +8,7 @@ Aplicação desktop em Python e Tkinter para verificar a conformidade de computa
 - perfis independentes em arquivos JSON;
 - validação de softwares por um ou mais caminhos possíveis;
 - verificação do driver de vídeo do fabricante;
-- verificação do estado de ativação do Windows, incluindo ambientes KMS;
+- verificação do estado de ativação do Windows, incluindo ambientes KMS e consulta alternativa pelo SLMGR;
 - identificação do IPv4 principal;
 - resumo de itens conformes e não conformes;
 - temas claro e escuro;

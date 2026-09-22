@@ -440,19 +440,105 @@ def verificar_driver_video() -> tuple[str, str]:
     return "conforme", "; ".join(detalhes)
 
 
+def _verificar_ativacao_slmgr() -> tuple[str, str]:
+    """Usa o SLMGR como alternativa quando o provedor CIM não responde."""
+    comando = (
+        "[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; "
+        "$ErrorActionPreference = 'Stop'; "
+        "$saida = @(& \"$env:SystemRoot\\System32\\cscript.exe\" //Nologo "
+        "\"$env:SystemRoot\\System32\\slmgr.vbs\" /dli 2>&1); "
+        "$resultado = [PSCustomObject]@{ "
+        "ExitCode = $LASTEXITCODE; Output = ($saida -join \"`n\") }; "
+        "ConvertTo-Json -InputObject $resultado -Compress -Depth 2"
+    )
+    argumentos = [
+        "powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-NonInteractive",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        comando,
+    ]
+    opcoes: dict[str, object] = {
+        "capture_output": True,
+        "text": True,
+        "encoding": "utf-8",
+        "errors": "replace",
+        "timeout": 25,
+        "check": False,
+    }
+    if hasattr(subprocess, "CREATE_NO_WINDOW"):
+        opcoes["creationflags"] = subprocess.CREATE_NO_WINDOW
+
+    try:
+        processo = subprocess.run(argumentos, **opcoes)
+    except (OSError, subprocess.SubprocessError):
+        return "erro", "Não foi possível consultar a ativação do Windows"
+
+    if processo.returncode != 0 or not processo.stdout.strip():
+        return "erro", "Não foi possível consultar a ativação do Windows"
+
+    try:
+        resultado = json.loads(processo.stdout.lstrip("\ufeff").strip())
+    except (json.JSONDecodeError, TypeError):
+        return "erro", "Resposta inválida ao consultar a ativação do Windows"
+
+    if not isinstance(resultado, dict):
+        return "erro", "Resposta inválida ao consultar a ativação do Windows"
+
+    try:
+        codigo_saida = int(resultado.get("ExitCode", -1))
+    except (TypeError, ValueError):
+        codigo_saida = -1
+    saida = str(resultado.get("Output") or "").strip()
+    if codigo_saida != 0 or not saida:
+        return "erro", "O Gerenciador de Licenças não retornou o estado da ativação"
+
+    texto = _normalizar_texto(saida)
+    indicadores_negativos = (
+        "unlicensed",
+        "nao licenciado",
+        "notification",
+        "notificacao",
+        "not activated",
+        "nao ativado",
+        "nao esta ativado",
+        "grace",
+        "tolerancia",
+    )
+    if any(indicador in texto for indicador in indicadores_negativos):
+        return "falha", "Windows não ativado ou em período de tolerância"
+
+    indicadores_positivos = (
+        "license status: licensed",
+        "status da licenca: licenciado",
+        "estado da licenca: licenciado",
+        "permanently activated",
+        "permanentemente ativado",
+        "permanentemente ativada",
+    )
+    if any(indicador in texto for indicador in indicadores_positivos):
+        return "conforme", "Windows ativado — verificado pelo SLMGR"
+
+    return "erro", "Estado da ativação retornado pelo Windows não foi reconhecido"
+
+
 def verificar_ativacao_windows() -> tuple[str, str]:
-    """Verifica o estado atual da licença do Windows por um código numérico."""
+    """Verifica a licença via CIM e usa o SLMGR como alternativa."""
     if platform.system() != "Windows":
         return "erro", "Verificação disponível somente no Windows"
 
     comando = (
         "[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; "
         "$ErrorActionPreference = 'Stop'; "
-        "$produtos = @(Get-CimInstance -ClassName SoftwareLicensingProduct "
-        "| Where-Object { $_.ApplicationID -eq "
-        "'55c92734-d682-4d71-983e-d6ec3f16059f' -and $_.PartialProductKey } "
+        "$produtos = @(Get-CimInstance -Namespace 'root/cimv2' "
+        "-ClassName SoftwareLicensingProduct "
+        "-Filter \"ApplicationID='55c92734-d682-4d71-983e-d6ec3f16059f' "
+        "AND PartialProductKey IS NOT NULL\" "
         "| Select-Object Name, Description, LicenseStatus, "
-        "ProductKeyChannel, GracePeriodRemaining); "
+        "GracePeriodRemaining); "
         "ConvertTo-Json -InputObject $produtos -Compress -Depth 3"
     )
     argumentos = [
@@ -479,15 +565,15 @@ def verificar_ativacao_windows() -> tuple[str, str]:
     try:
         processo = subprocess.run(argumentos, **opcoes)
     except (OSError, subprocess.SubprocessError):
-        return "erro", "Não foi possível consultar a ativação do Windows"
+        return _verificar_ativacao_slmgr()
 
     if processo.returncode != 0 or not processo.stdout.strip():
-        return "erro", "Não foi possível consultar a ativação do Windows"
+        return _verificar_ativacao_slmgr()
 
     try:
         dados = json.loads(processo.stdout.lstrip("\ufeff").strip())
     except (json.JSONDecodeError, TypeError):
-        return "erro", "Resposta inválida ao consultar a ativação do Windows"
+        return _verificar_ativacao_slmgr()
 
     if isinstance(dados, dict):
         produtos = [dados]
@@ -497,7 +583,7 @@ def verificar_ativacao_windows() -> tuple[str, str]:
         produtos = []
 
     if not produtos:
-        return "falha", "Licença do Windows não identificada"
+        return _verificar_ativacao_slmgr()
 
     produtos_com_status: list[tuple[dict[str, object], int]] = []
     for produto in produtos:
@@ -515,10 +601,10 @@ def verificar_ativacao_windows() -> tuple[str, str]:
             or produto.get("Description")
             or "Windows"
         ).strip()
-        canal = str(produto.get("ProductKeyChannel") or "").strip()
         detalhes = f"{nome} — Ativado"
-        if canal:
-            detalhes += f" — canal {canal}"
+        descricao = _normalizar_texto(produto.get("Description"))
+        if "kmsclient" in descricao:
+            detalhes += " — KMS"
         return "conforme", detalhes
 
     descricoes_status = {
