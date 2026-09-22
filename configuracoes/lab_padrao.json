@@ -1,0 +1,63 @@
+{
+  "versao": 1,
+  "ordem": 7,
+  "codigo": "AdmPadrao",
+  "laboratorio": "Administrativo — Padrão",
+  "descricao": "Perfil administrativo padrão",
+  "observacao": "Edite somente este arquivo para alterar a lista do perfil. Use ativo=false para ignorar um item.",
+  "softwares": [
+    {
+      "nome": "Microsoft Office 365",
+      "categoria": "Produtividade",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\POWERPNT.EXE",
+        "C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\EXCEL.EXE"
+      ]
+    },
+    {
+      "nome": "Google Chrome",
+      "categoria": "Navegador",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+        "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
+      ]
+    },
+    {
+      "nome": "Java Runtime",
+      "categoria": "Desenvolvimento",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Java",
+        "C:\\Program Files (x86)\\Java",
+        "C:\\Program Files\\Eclipse Adoptium\\jre-*\\bin\\java.exe"
+      ]
+    },
+    {
+      "nome": "Trend Micro VOneAgent",
+      "categoria": "Segurança",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files (x86)\\Trend Micro\\Endpoint Basecamp\\modules\\vom\\modules\\UiBridgeModule\\VOneAgentConsole\\VOneAgentConsoleTray.exe"
+      ]
+    },
+    {
+      "nome": "SCCM Console",
+      "categoria": "Gerenciamento",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Windows\\CCM\\RemCtrl\\CmRcService.exe"
+      ]
+    },
+    {
+      "nome": "Microsoft Teams",
+      "categoria": "Comunicação",
+      "ativo": true,
+      "caminhos": [
+        "%LOCALAPPDATA%\\Microsoft\\WindowsApps\\ms-teams.exe",
+        "%LOCALAPPDATA%\\Microsoft\\Teams\\current\\Teams.exe"
+      ]
+    }
+  ]
+}
