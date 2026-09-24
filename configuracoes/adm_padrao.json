@@ -7,7 +7,7 @@
   "observacao": "Edite somente este arquivo para alterar a lista do perfil. Use ativo=false para ignorar um item.",
   "softwares": [
     {
-      "nome": "Microsoft Office 365",
+      "nome": "Microsoft Office",
       "categoria": "Produtividade",
       "ativo": true,
       "caminhos": [
