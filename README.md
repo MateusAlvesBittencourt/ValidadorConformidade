@@ -1,4 +1,4 @@
-# Validador de Conformidade de Laboratórios
+# ValidadorLaboratorios
 
 Aplicação desktop em Python e Tkinter para verificar a conformidade de computadores dos laboratórios. O programa valida os softwares esperados, o driver de vídeo, a ativação do Windows e o endereço IPv4 principal do dispositivo.
 
@@ -63,4 +63,4 @@ python -m pip install pyinstaller
 pyinstaller --noconfirm --onefile --windowed --name ValidadorLaboratorios --add-data "configuracoes;configuracoes" validador_conformidade.py
 ```
 
-O executável será criado na pasta `dist`.
+O executável será criado como `dist\\ValidadorLaboratorios.exe`. Você também pode executar `gerar_exe.bat` para criar o EXE ou `executar_validador.bat` para abrir o programa pelo Python.
