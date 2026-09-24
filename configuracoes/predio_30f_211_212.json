@@ -7,14 +7,6 @@
   "observacao": "Edite somente este arquivo para alterar a lista do laboratório. Use ativo=false para ignorar um item.",
   "softwares": [
     {
-      "nome": "7-Zip",
-      "categoria": "Utilitário",
-      "ativo": true,
-      "caminhos": [
-        "C:\\Program Files\\7-Zip\\7zFM.exe"
-      ]
-    },
-    {
       "nome": "Adobe Acrobat Pro",
       "categoria": "Produtividade",
       "ativo": true,
@@ -165,7 +157,7 @@
       "categoria": "Engenharia",
       "ativo": true,
       "caminhos": [
-        "C:\\GAMS\\48\\studio\\studio.exe"
+        "C:\\GAMS\\50\\studio\\studio.exe"
       ]
     },
     {
@@ -173,7 +165,7 @@
       "categoria": "Desenvolvimento",
       "ativo": true,
       "caminhos": [
-        "C:\\Program Files\\GNU Octave\\Octave-9.1.0\\octave-launch.exe"
+        "C:\\Program Files\\GNU Octave\\Octave-10.2.0\\octave-launch.exe"
       ]
     },
     {
@@ -201,14 +193,6 @@
         "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Java\\Verificar Atualizações.lnk",
         "C:\\Program Files\\Java\\jre*\\bin\\java.exe",
         "C:\\Program Files\\Eclipse Adoptium\\jre-*\\bin\\java.exe"
-      ]
-    },
-    {
-      "nome": "Laboratorio de Reatores",
-      "categoria": "Engenharia",
-      "ativo": true,
-      "caminhos": [
-        "C:\\Program Files\\Laboratorio de Reatores\\Laboratorio de Reatores.exe"
       ]
     },
     {
@@ -349,23 +333,15 @@
       "categoria": "Engenharia",
       "ativo": true,
       "caminhos": [
-        "C:\\Program Files\\scilab-2024.0.0\\bin\\WScilex.exe"
+        "C:\\Program Files\\scilab-2025.1.0\\bin\\WScilex.exe"
       ]
     },
     {
-      "nome": "SketchUp 2025",
+      "nome": "SketchUp",
       "categoria": "CAD / BIM",
       "ativo": true,
       "caminhos": [
-        "C:\\Program Files\\SketchUp\\SketchUp 2024\\SketchUp.exe"
-      ]
-    },
-    {
-      "nome": "SketchUp 2024 - Licença",
-      "categoria": "Licença",
-      "ativo": true,
-      "caminhos": [
-        "C:\\ProgramData\\SketchUp\\SketchUp 2024\\SketchUp.lic"
+        "C:\\Program Files\\SketchUp\\SketchUp 2026\\SketchUp.exe"
       ]
     },
     {
