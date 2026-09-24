@@ -389,6 +389,22 @@
       ]
     },
     {
+      "nome": "R For Windows",
+      "categoria": "Desenvolvimento",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\R\\R-4.5.1\\bin\\x64\\Rgui.exe"
+      ]
+    },
+    {
+      "nome": "RStudio",
+      "categoria": "Desenvolvimento",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\RStudio\\rstudio.exe"
+      ]
+    },
+    {
       "nome": "Trend Micro VOneAgent",
       "categoria": "Segurança",
       "ativo": true,
