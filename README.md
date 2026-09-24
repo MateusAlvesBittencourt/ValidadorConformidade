@@ -1,66 +1,37 @@
 # ValidadorLaboratorios
 
-Aplicação desktop em Python e Tkinter para verificar a conformidade de computadores dos laboratórios. O programa valida os softwares esperados, o driver de vídeo, a ativação do Windows e o endereço IPv4 principal do dispositivo.
+Aplicativo desktop para validar softwares esperados, driver de vídeo do fabricante, ativação do Windows e IPv4 principal dos computadores dos laboratórios.
 
-## Funcionalidades
+## Versão Java
 
-- seleção de laboratório em ordem alfabética;
-- perfis independentes em arquivos JSON;
-- validação de softwares por um ou mais caminhos possíveis;
-- verificação do driver de vídeo do fabricante;
-- verificação do estado de ativação do Windows, incluindo ambientes KMS e consulta alternativa pelo SLMGR;
-- identificação do IPv4 principal;
-- resumo de itens conformes e não conformes;
-- temas claro e escuro;
-- avisos não bloqueantes para configurações inválidas.
+A versão principal fica em `src/ValidadorLaboratorios.java` e usa Swing, sem dependências externas. Ela mantém os arquivos JSON da pasta `configuracoes` e permite escolher o laboratório, alternar o tema, copiar o IPv4 e consultar o resultado de cada item. A verificação ocorre em segundo plano para manter a interface responsiva.
 
-## Estrutura
+### Gerar o JAR no Windows
 
-```text
-ValidadorConformidade/
-├── configuracoes/
-│   ├── adm_padrao.json
-│   ├── living.json
-│   ├── predio_30a_212_215.json
-│   ├── predio_30a_313_320.json
-│   ├── predio_30d_s1_02_05.json
-│   ├── predio_30f_201.json
-│   └── predio_30f_211_212.json
-├── validador_conformidade.py
-├── requirements.txt
-└── README.md
+Instale um **JDK 17 ou superior** no computador de compilação e execute `gerar_jar.bat` na pasta do projeto. O script compila o Java, embute todos os JSONs, verifica os perfis e cria `dist\ValidadorLaboratorios.jar`. Se a unidade `J:` estiver disponível, também copia o JAR para `J:\C\Certificação Imagem\Validador`.
+
+No computador cliente, é necessário **Java 17 ou superior** para abrir o JAR:
+
+```bat
+java -jar ValidadorLaboratorios.jar
 ```
 
-## Como executar
+O arquivo `executar_jar.bat` abre o JAR a partir da pasta `dist` ou da mesma pasta do `.bat`.
 
-Requer Python 3.10 ou superior.
+Os JSONs embutidos funcionam mesmo sem a pasta `configuracoes` ao lado do JAR. Para alterar um perfil sem recompilar, crie uma pasta `configuracoes` ao lado do JAR e coloque nela um JSON com o mesmo nome; esse arquivo externo substitui apenas o perfil correspondente. Reinicie o aplicativo após editar um JSON.
 
-```powershell
-python -m pip install -r requirements.txt
-python validador_conformidade.py
+Para conferir as configurações sem abrir a janela:
+
+```bat
+java -jar ValidadorLaboratorios.jar --check-config
 ```
 
-O pacote `psutil` melhora a identificação da interface de rede, mas o programa continua funcional sem ele.
+O `.jar` não elimina a necessidade de validação pelas políticas de segurança da organização. Verifique com a equipe de segurança o alerta específico do antivírus antes de distribuí-lo.
 
-## Configuração dos laboratórios
+## Configuração
 
-Cada arquivo da pasta `configuracoes` representa um ambiente. Os campos principais são:
+Cada arquivo JSON define `codigo`, `laboratorio`, `descricao` e `softwares`. Cada software ativo tem `nome`, `categoria` e uma lista de `caminhos` alternativos. O campo `ativo: false` ignora o item. Driver de vídeo e ativação do Windows são verificados em todos os perfis.
 
-- `codigo`: identificador único do perfil;
-- `laboratorio`: nome apresentado no seletor;
-- `descricao`: descrição exibida na interface;
-- `softwares`: lista de itens e caminhos aceitos;
-- `ativo`: permite ignorar um software sem removê-lo do JSON.
+## Versão Python anterior
 
-Após alterar um JSON, reinicie o programa para carregar a nova configuração.
-
-## Gerar executável no Windows
-
-Com o PyInstaller instalado:
-
-```powershell
-python -m pip install pyinstaller
-pyinstaller --noconfirm --onefile --windowed --name ValidadorLaboratorios --add-data "configuracoes;configuracoes" validador_conformidade.py
-```
-
-O executável será criado como `dist\\ValidadorLaboratorios.exe`. Você também pode executar `gerar_exe.bat` para criar o EXE ou `executar_validador.bat` para abrir o programa pelo Python.
+`validador_conformidade.py`, `executar_validador.bat`, `gerar_exe.bat` e `requirements.txt` permanecem disponíveis para a transição. O gerador Python cria o `.exe` em `dist` e usa os mesmos JSONs.
