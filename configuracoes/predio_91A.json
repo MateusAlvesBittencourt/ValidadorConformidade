@@ -65,6 +65,9 @@
       "caminhos": [
         "%LOCALAPPDATA%\\Microsoft\\WindowsApps\\ms-teams.exe",
         "%LOCALAPPDATA%\\Microsoft\\Teams\\current\\Teams.exe"
+      ],
+      "appx": [
+        "MSTeams"
       ]
     }
   ]
