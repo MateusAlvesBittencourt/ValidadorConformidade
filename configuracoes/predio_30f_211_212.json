@@ -136,14 +136,6 @@
       ]
     },
     {
-      "nome": "EnergyPlus",
-      "categoria": "Engenharia",
-      "ativo": true,
-      "caminhos": [
-        "C:\\EnergyPlusV24-1-0\\EP-Launch.exe"
-      ]
-    },
-    {
       "nome": "ETAP 22.5.0",
       "categoria": "Engenharia",
       "ativo": true,
@@ -194,27 +186,11 @@
       ]
     },
     {
-      "nome": "Hourly Analysis Program 5.11",
-      "categoria": "Engenharia",
-      "ativo": true,
-      "caminhos": [
-        "C:\\E20-II\\HAP51\\CODE\\hap.exe"
-      ]
-    },
-    {
       "nome": "ImageJ",
       "categoria": "Multimídia",
       "ativo": true,
       "caminhos": [
         "C:\\Program Files\\ImageJ\\ImageJ.exe"
-      ]
-    },
-    {
-      "nome": "Inkscape",
-      "categoria": "Multimídia",
-      "ativo": true,
-      "caminhos": [
-        "C:\\Program Files\\Inkscape\\bin\\inkscape.exe"
       ]
     },
     {
@@ -241,14 +217,6 @@
       "ativo": true,
       "caminhos": [
         "C:\\Program Files\\MATLAB\\R2012b\\bin\\matlab.exe"
-      ]
-    },
-    {
-      "nome": "Mendeley Desktop",
-      "categoria": "Produtividade",
-      "ativo": true,
-      "caminhos": [
-        "C:\\Program Files (x86)\\Mendeley Desktop\\MendeleyDesktop.exe"
       ]
     },
     {
@@ -364,7 +332,7 @@
       "categoria": "CAD / BIM",
       "ativo": true,
       "caminhos": [
-        "C:\\Program Files\\PTC\\Creo 7.0.1.0\\Layout\\bin\\layout.exe"
+        "C:\\Program Files\\PTC\\Creo 11.0.3.0\\Parametric\\bin\\parametric.exe"
       ]
     },
     {
@@ -377,14 +345,6 @@
       ]
     },
     {
-      "nome": "Reatores Quimicos",
-      "categoria": "Engenharia",
-      "ativo": true,
-      "caminhos": [
-        "C:\\Program Files\\Reatores Quimicos\\Ecology\\Ecology.exe"
-      ]
-    },
-    {
       "nome": "Scilab",
       "categoria": "Engenharia",
       "ativo": true,
@@ -393,7 +353,7 @@
       ]
     },
     {
-      "nome": "SketchUp 2024",
+      "nome": "SketchUp 2025",
       "categoria": "CAD / BIM",
       "ativo": true,
       "caminhos": [
@@ -414,46 +374,6 @@
       "ativo": true,
       "caminhos": [
         "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\SOLIDWORKS 2023\\SOLIDWORKS 2023.lnk"
-      ]
-    },
-    {
-      "nome": "SOLIDWORKS Composer 2023",
-      "categoria": "CAD / BIM",
-      "ativo": true,
-      "caminhos": [
-        "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\SOLIDWORKS 2023\\SOLIDWORKS Composer 2023\\SOLIDWORKS Composer 2023.lnk"
-      ]
-    },
-    {
-      "nome": "SOLIDWORKS Composer Player 2023",
-      "categoria": "CAD / BIM",
-      "ativo": true,
-      "caminhos": [
-        "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\SOLIDWORKS 2023\\SOLIDWORKS Composer 2023\\SOLIDWORKS Composer Player 2023.lnk"
-      ]
-    },
-    {
-      "nome": "SOLIDWORKS Electrical 2023",
-      "categoria": "CAD / BIM",
-      "ativo": true,
-      "caminhos": [
-        "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\SOLIDWORKS 2023\\SOLIDWORKS Electrical.lnk"
-      ]
-    },
-    {
-      "nome": "SOLIDWORKS Manage 2023",
-      "categoria": "CAD / BIM",
-      "ativo": true,
-      "caminhos": [
-        "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\SOLIDWORKS 2023\\SOLIDWORKS Manage 2023.lnk"
-      ]
-    },
-    {
-      "nome": "SOLIDWORKS Visualize 2023",
-      "categoria": "CAD / BIM",
-      "ativo": true,
-      "caminhos": [
-        "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\SOLIDWORKS 2023\\SOLIDWORKS Visualize 2023.lnk"
       ]
     },
     {
