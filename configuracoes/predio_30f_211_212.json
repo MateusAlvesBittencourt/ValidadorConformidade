@@ -340,7 +340,12 @@
       "ativo": true,
       "caminhos": [
         "C:\\Program Files\\QGIS *\\bin\\qgis*-bin.exe",
-        "C:\\Program Files (x86)\\QGIS *\\bin\\qgis*-bin.exe"
+        "C:\\Program Files\\QGIS *\\apps\\qgis\\bin\\qgis*-bin.exe",
+        "C:\\Program Files\\QGIS *\\apps\\qgis-ltr\\bin\\qgis*-bin.exe",
+        "C:\\Program Files\\QGIS *\\bin\\qgis*.exe",
+        "C:\\Program Files (x86)\\QGIS *\\bin\\qgis*-bin.exe",
+        "C:\\OSGeo4W\\bin\\qgis*-bin.exe",
+        "C:\\OSGeo4W64\\bin\\qgis*-bin.exe"
       ]
     },
     {
@@ -384,10 +389,10 @@
       ]
     },
     {
-      "nome":"RStudio",
-      "categoria":"Análise de dados",
-      "ativo":true,
-      "caminhos":[
+      "nome": "RStudio",
+      "categoria": "Análise de dados",
+      "ativo": true,
+      "caminhos": [
         "C:\\Program Files\\RStudio\\rstudio.exe"
       ]
     },
@@ -428,7 +433,14 @@
       "categoria": "Fonte",
       "ativo": true,
       "caminhos": [
-        "C:\\Windows\\Fonts\\OpenSans*.ttf"
+        "C:\\Windows\\Fonts\\${n}*.ttf",
+        "%LOCALAPPDATA%\\Microsoft\\Windows\\Fonts\\${n}*.ttf",
+        "C:\\Windows\\Fonts\\${n}*.otf",
+        "%LOCALAPPDATA%\\Microsoft\\Windows\\Fonts\\${n}*.otf",
+        "C:\\Windows\\Fonts\\${n}*.ttf",
+        "%LOCALAPPDATA%\\Microsoft\\Windows\\Fonts\\${n}*.ttf",
+        "C:\\Windows\\Fonts\\${n}*.otf",
+        "%LOCALAPPDATA%\\Microsoft\\Windows\\Fonts\\${n}*.otf"
       ]
     },
     {
