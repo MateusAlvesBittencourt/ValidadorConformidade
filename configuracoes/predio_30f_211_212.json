@@ -15,47 +15,15 @@
       ]
     },
     {
-      "nome": "Adobe After Effects 2025",
-      "categoria": "Multimídia",
+      "nome": "Adobe Acrobat Pro",
+      "categoria": "Produtividade",
       "ativo": true,
       "caminhos": [
-        "C:\\Program Files\\Adobe\\Adobe After Effects 2025\\Support Files\\AfterFX.exe"
+        "C:\\Program Files\\Adobe\\Acrobat DC\\Acrobat\\Acrobat.exe"
       ]
     },
     {
-      "nome": "Adobe Animate 2024",
-      "categoria": "Multimídia",
-      "ativo": true,
-      "caminhos": [
-        "C:\\Program Files\\Adobe\\Adobe Animate 2024\\Animate.exe"
-      ]
-    },
-    {
-      "nome": "Adobe Audition 2025",
-      "categoria": "Multimídia",
-      "ativo": true,
-      "caminhos": [
-        "C:\\Program Files\\Adobe\\Adobe Audition 2025\\Adobe Audition.exe"
-      ]
-    },
-    {
-      "nome": "Adobe Bridge 2025",
-      "categoria": "Multimídia",
-      "ativo": true,
-      "caminhos": [
-        "C:\\Program Files\\Adobe\\Adobe Bridge 2025\\Adobe Bridge.exe"
-      ]
-    },
-    {
-      "nome": "Adobe Dreamweaver 2021",
-      "categoria": "Multimídia",
-      "ativo": true,
-      "caminhos": [
-        "C:\\Program Files\\Adobe\\Adobe Dreamweaver 2021\\Dreamweaver.exe"
-      ]
-    },
-    {
-      "nome": "Adobe Illustrator 2025",
+      "nome": "Adobe Illustrator",
       "categoria": "Multimídia",
       "ativo": true,
       "caminhos": [
@@ -63,19 +31,11 @@
       ]
     },
     {
-      "nome": "Adobe InDesign 2025",
+      "nome": "Adobe InDesign",
       "categoria": "Multimídia",
       "ativo": true,
       "caminhos": [
         "C:\\Program Files\\Adobe\\Adobe InDesign 2025\\InDesign.exe"
-      ]
-    },
-    {
-      "nome": "Adobe Media Encoder 2025",
-      "categoria": "Multimídia",
-      "ativo": true,
-      "caminhos": [
-        "C:\\Program Files\\Adobe\\Adobe Media Encoder 2025\\Adobe Media Encoder.exe"
       ]
     },
     {
@@ -87,36 +47,11 @@
       ]
     },
     {
-      "nome": "Adobe Premiere Pro 2025",
-      "categoria": "Multimídia",
-      "ativo": true,
-      "caminhos": [
-        "C:\\Program Files\\Adobe\\Adobe Premiere Pro 2025\\Adobe Premiere Pro.exe"
-      ]
-    },
-    {
-      "nome": "Adobe Premiere Rush 2025",
-      "categoria": "Multimídia",
-      "ativo": true,
-      "caminhos": [
-        "C:\\Program Files\\Adobe\\Adobe Premiere Rush 2.0\\Adobe Premiere Rush.exe"
-      ]
-    },
-    {
       "nome": "ArchiCAD 28",
       "categoria": "CAD / BIM",
       "ativo": true,
       "caminhos": [
         "C:\\Program Files\\Graphisoft\\Archicad 28\\Archicad Starter.exe"
-      ]
-    },
-    {
-      "nome": "Arduino IDE",
-      "categoria": "Desenvolvimento",
-      "ativo": true,
-      "caminhos": [
-        "C:\\Program Files\\Arduino IDE\\Arduino IDE.exe",
-        "C:\\Program Files (x86)\\Arduino\\arduino.exe"
       ]
     },
     {
@@ -136,44 +71,36 @@
       ]
     },
     {
-      "nome": "Autodesk 3DS Max 2025",
+      "nome": "Autodesk 3DS Max 2026",
       "categoria": "CAD / BIM",
       "ativo": true,
       "caminhos": [
-        "C:\\Program Files\\Autodesk\\3ds Max 2025\\3dsmax.exe"
+        "C:\\Program Files\\Autodesk\\3ds Max 2026\\3dsmax.exe"
       ]
     },
     {
-      "nome": "Autodesk AutoCAD 2025",
+      "nome": "Autodesk AutoCAD 2026",
       "categoria": "CAD / BIM",
       "ativo": true,
       "caminhos": [
-        "C:\\Program Files\\Autodesk\\AutoCAD 2025\\acad.exe",
-        "C:\\Arquivos de Programas\\Autodesk\\AutoCAD 2025\\acad.exe"
+        "C:\\Program Files\\Autodesk\\AutoCAD 2026\\acad.exe",
+        "C:\\Arquivos de Programas\\Autodesk\\AutoCAD 2026\\acad.exe"
       ]
     },
     {
-      "nome": "Autodesk Inventor Professional 2025",
+      "nome": "Autodesk Inventor Professional 2026",
       "categoria": "CAD / BIM",
       "ativo": true,
       "caminhos": [
-        "C:\\Program Files\\Autodesk\\Inventor 2025\\Bin\\Inventor.exe"
+        "C:\\Program Files\\Autodesk\\Inventor 2026\\Bin\\Inventor.exe"
       ]
     },
     {
-      "nome": "Autodesk Revit 2025",
+      "nome": "Autodesk Revit 2026",
       "categoria": "CAD / BIM",
       "ativo": true,
       "caminhos": [
-        "C:\\Program Files\\Autodesk\\Revit 2025\\Revit.exe"
-      ]
-    },
-    {
-      "nome": "CODESYS V3.5.11",
-      "categoria": "Engenharia",
-      "ativo": true,
-      "caminhos": [
-        "C:\\Program Files (x86)\\Eaton\\XSOFT-CODESYS-3\\CODESYS\\Common\\XSoft3.exe"
+        "C:\\Program Files\\Autodesk\\Revit 2026\\Revit.exe"
       ]
     },
     {
@@ -190,30 +117,6 @@
       "ativo": true,
       "caminhos": [
         "C:\\Program Files\\DIAL GmbH\\DIALux\\DIALux.exe"
-      ]
-    },
-    {
-      "nome": "Decision Tools",
-      "categoria": "Análise de dados",
-      "ativo": true,
-      "caminhos": [
-        "C:\\Program Files (x86)\\Palisade\\RISK8\\Risk.exe"
-      ]
-    },
-    {
-      "nome": "Decision Tools - Licença",
-      "categoria": "Licença",
-      "ativo": true,
-      "caminhos": [
-        "C:\\Program Files (x86)\\Palisade\\System\\Palisade_Course.lic"
-      ]
-    },
-    {
-      "nome": "DigitalWorks",
-      "categoria": "Engenharia",
-      "ativo": true,
-      "caminhos": [
-        "C:\\Program Files\\Digital Works\\DigitalWorks.exe"
       ]
     },
     {
