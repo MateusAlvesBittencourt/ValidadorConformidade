@@ -36,6 +36,7 @@ public final class ValidadorLaboratorios extends JFrame {
     private final JLabel conformes = new JLabel("—");
     private final JLabel falhas = new JLabel("—");
     private final JLabel ip = new JLabel(ipPrincipal());
+    private final JLabel dispositivo = rotulo(host().toUpperCase(Locale.ROOT), 12, true);
     private final JLabel quantidade = new JLabel("Selecione um ambiente");
     private final JLabel ultima = new JLabel("Última verificação: selecione um laboratório");
     private final JButton validar = new JButton("Validar agora");
@@ -50,6 +51,7 @@ public final class ValidadorLaboratorios extends JFrame {
     private final Set<JPanel> paineisFundo = new HashSet<>();
     private JPanel blocoTabela;
     private JPanel[] cartoes;
+    private final List<JLabel> titulosCartoes = new ArrayList<>();
 
     private ValidadorLaboratorios(Leitura leitura) {
         super("ValidadorLaboratorios");
@@ -67,12 +69,17 @@ public final class ValidadorLaboratorios extends JFrame {
         JLabel l = new JLabel(texto); l.setFont(new Font("Segoe UI", negrito ? Font.BOLD : Font.PLAIN, tamanho)); return l;
     }
     private JPanel cartao(String texto, JLabel valor) {
-        JPanel p = painel(new BorderLayout(4, 8)); p.setPreferredSize(new Dimension(200, 104));
-        p.add(rotulo(texto.toUpperCase(Locale.ROOT), 11, true), BorderLayout.NORTH);
-        valor.setFont(new Font("Segoe UI", Font.BOLD, 17));
-        JPanel linha = painel(new BorderLayout()); linha.add(valor, BorderLayout.CENTER);
-        if (valor == ip) linha.add(copiar, BorderLayout.EAST);
-        p.add(linha, BorderLayout.CENTER); return p;
+        JPanel p = painel(new BorderLayout(4, 6)); p.setPreferredSize(new Dimension(200, 112));
+        JLabel legenda = rotulo(texto.toUpperCase(Locale.ROOT), 11, true);
+        titulosCartoes.add(legenda);
+        p.add(legenda, BorderLayout.NORTH);
+        valor.setFont(new Font("Segoe UI", Font.BOLD, valor == ip ? 15 : 18));
+        p.add(valor, BorderLayout.CENTER);
+        if (valor == ip) {
+            JPanel acoes = painel(new FlowLayout(FlowLayout.RIGHT, 0, 0));
+            acoes.add(copiar); p.add(acoes, BorderLayout.SOUTH);
+        }
+        return p;
     }
     private void construir() {
         raiz = painel(new BorderLayout(0, 16)); raiz.setBorder(BorderFactory.createEmptyBorder(22, 26, 18, 26)); setContentPane(raiz);
@@ -84,10 +91,15 @@ public final class ValidadorLaboratorios extends JFrame {
         textos.add(rotulo("Valide softwares essenciais, driver de vídeo e ativação do Windows.", 12, false));
         cabecalho.add(textos, BorderLayout.CENTER);
         JPanel direita = painel(new FlowLayout(FlowLayout.RIGHT, 12, 12));
-        direita.add(rotulo("DISPOSITIVO  " + host().toUpperCase(Locale.ROOT), 11, true)); direita.add(tema); cabecalho.add(direita, BorderLayout.EAST);
+        JPanel identificacao = painel(new BorderLayout(0, 2));
+        identificacao.add(rotulo("DISPOSITIVO", 10, true), BorderLayout.NORTH);
+        identificacao.add(dispositivo, BorderLayout.CENTER);
+        direita.add(identificacao); direita.add(tema); cabecalho.add(direita, BorderLayout.EAST);
         JPanel escolha = painel(new BorderLayout(12, 8)); escolha.setBorder(BorderFactory.createEmptyBorder(12, 16, 12, 16));
         escolha.add(rotulo("LABORATÓRIO", 11, true), BorderLayout.WEST);
         JPanel selecionar = painel(new BorderLayout(0, 5)); selecionar.add(seletor, BorderLayout.NORTH); selecionar.add(descricao, BorderLayout.SOUTH);
+        seletor.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        seletor.setPreferredSize(new Dimension(300, 34));
         escolha.add(selecionar, BorderLayout.CENTER); cima.add(escolha, BorderLayout.CENTER);
         seletor.addItem("Selecione um laboratório..."); for (Laboratorio lab : leitura.laboratorios()) seletor.addItem(lab.nome());
         seletor.addActionListener(e -> selecionar());
@@ -163,7 +175,8 @@ public final class ValidadorLaboratorios extends JFrame {
         atual = leitura.laboratorios().stream().filter(x -> x.nome().equals(nome)).findFirst().orElse(null);
         if (atual == null) { validar.setEnabled(false); descricao.setText("Escolha um laboratório para iniciar"); quantidade.setText("Selecione um ambiente"); ultima.setText("Última verificação: selecione um laboratório"); }
         else { validar.setEnabled(true); descricao.setText(atual.descricao() + " • " + itens().size() + " itens monitorados");
-            quantidade.setText(itens().size() + " itens"); ultima.setText("Última verificação: " + ultimas.getOrDefault(atual.codigo(), "ainda não realizada")); }
+            descricao.setToolTipText(atual.descricao());
+            ultima.setText("Última verificação: " + ultimas.getOrDefault(atual.codigo(), "ainda não realizada")); }
         atualizarTabela(); atualizarResumo();
     }
     private void atualizarTabela() {
@@ -176,11 +189,14 @@ public final class ValidadorLaboratorios extends JFrame {
     }
     private static String textoStatus(String s) { return switch(s) {case "conforme" -> "✓ Conforme"; case "falha" -> "× Não encontrado"; case "erro" -> "⚠ Não verificado"; case "verificando" -> "◌ Verificando"; default -> "○ Pendente";}; }
     private void atualizarResumo() {
-        if (atual == null) { geral.setText("Selecione"); conformes.setText("—"); falhas.setText("—"); atualizarCoresResumo(); return; }
+        if (atual == null) { geral.setText("Selecione"); conformes.setText("—"); falhas.setText("—"); quantidade.setText("Selecione um ambiente"); atualizarCoresResumo(); return; }
         Collection<Resultado> vals = resultados.getOrDefault(atual.codigo(), Map.of()).values();
         long ok = vals.stream().filter(r -> r.estado().equals("conforme")).count();
         long nao = vals.stream().filter(r -> r.estado().equals("falha") || r.estado().equals("erro")).count();
         conformes.setText(ok + " de " + itens().size()); falhas.setText("" + nao);
+        long verificados = ok + nao;
+        quantidade.setText(verificados == 0 && !trabalhando ? itens().size() + " itens" :
+            verificados + " de " + itens().size() + " verificados");
         geral.setText(trabalhando ? "Verificando" : ok + nao == 0 ? "Aguardando" : nao == 0 && ok == itens().size() ? "Em conformidade" : "Requer atenção");
         atualizarCoresResumo();
     }
@@ -230,6 +246,9 @@ public final class ValidadorLaboratorios extends JFrame {
         }
         blocoTabela.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(borda, 1, true), BorderFactory.createEmptyBorder(16, 16, 14, 16)));
         titulo.setForeground(azul); tema.setText(escuro ? "☀  Tema claro" : "☾  Tema escuro");
+        for (JLabel legenda : titulosCartoes) legenda.setForeground(cor(escuro ? "#A8B3C5" : "#667085"));
+        dispositivo.setForeground(azul);
+        descricao.setForeground(cor(escuro ? "#A8B3C5" : "#667085"));
         atualizarCoresResumo();
         ip.setForeground(azul);
         tabela.setBackground(superficie); tabela.setForeground(texto);
@@ -238,7 +257,10 @@ public final class ValidadorLaboratorios extends JFrame {
         validar.setBackground(azul); validar.setForeground(Color.WHITE); validar.setFocusPainted(false);
         validar.setBorder(BorderFactory.createEmptyBorder(10, 18, 10, 18));
         copiar.setUI(new javax.swing.plaf.basic.BasicButtonUI()); copiar.setBackground(cor(escuro ? "#1B315E" : "#E8F0FF"));
-        copiar.setForeground(azul); copiar.setBorder(BorderFactory.createEmptyBorder(6, 10, 6, 10));
+        copiar.setForeground(azul); copiar.setFont(new Font("Segoe UI", Font.BOLD, 10)); copiar.setFocusPainted(false);
+        copiar.setBorder(BorderFactory.createEmptyBorder(4, 8, 4, 8));
+        tema.setUI(new javax.swing.plaf.basic.BasicButtonUI()); tema.setBackground(cor(escuro ? "#243146" : "#E8F0FF"));
+        tema.setForeground(azul); tema.setFocusPainted(false); tema.setBorder(BorderFactory.createEmptyBorder(9, 12, 9, 12));
         quantidade.setForeground(azul); ultima.setForeground(cor(escuro ? "#A8B3C5" : "#667085"));
         tabela.repaint(); revalidate();
         repaint();
