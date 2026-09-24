@@ -26,11 +26,19 @@ Para conferir as configurações sem abrir a janela:
 java -jar ValidadorLaboratorios.jar --check-config
 ```
 
+Para diagnosticar a ativação do Windows sem abrir a janela:
+
+```bat
+java -jar ValidadorLaboratorios.jar --check-activation
+```
+
+O resultado indica `conforme`, `falha` ou `erro`. Se as duas consultas à licença falharem, a mensagem apresenta as causas retornadas pelo CIM e pelo SLMGR.
+
 O `.jar` não elimina a necessidade de validação pelas políticas de segurança da organização. Verifique com a equipe de segurança o alerta específico do antivírus antes de distribuí-lo.
 
 ## Configuração
 
-Cada arquivo JSON define `codigo`, `laboratorio`, `descricao` e `softwares`. Cada software ativo tem `nome`, `categoria` e uma lista de `caminhos` alternativos. O campo `ativo: false` ignora o item. Driver de vídeo e ativação do Windows são verificados em todos os perfis.
+Cada arquivo JSON define `codigo`, `laboratorio`, `descricao` e `softwares`. Cada software ativo tem `nome`, `categoria` e uma lista de `caminhos` alternativos. Opcionalmente, `appx` indica nomes de pacotes MSIX para consultar, como `MSTeams`. O campo `ativo: false` ignora o item. Driver de vídeo e ativação do Windows são verificados em todos os perfis.
 
 ## Executar pelo VS Code
 
