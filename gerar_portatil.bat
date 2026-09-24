@@ -5,11 +5,15 @@ cd /d "%~dp0"
 
 rem Compilar e empacotar sempre com ferramentas do mesmo JDK (17 ou superior).
 set "JDK_BIN="
-if defined JAVA_HOME if exist "%JAVA_HOME%\bin\javac.exe" set "JDK_BIN=%JAVA_HOME%\bin\"
-if not defined JDK_BIN for /f "delims=" %%I in ('where javac.exe 2^>nul') do if not defined JDK_BIN set "JDK_BIN=%%~dpI"
+if defined JAVA_HOME call :tentar_jdk "%JAVA_HOME%\bin\"
+rem O javapath da Oracle pode conter atalhos java/javac, sem jpackage ou jmods.
+if not defined JDK_BIN for /f "delims=" %%I in ('where javac.exe 2^>nul') do if not defined JDK_BIN call :tentar_jdk "%%~dpI"
+if not defined JDK_BIN for /d %%D in ("%ProgramFiles%\Java\jdk-*") do if not defined JDK_BIN call :tentar_jdk "%%~fD\bin\"
+if not defined JDK_BIN for /d %%D in ("%ProgramFiles%\Eclipse Adoptium\jdk-*") do if not defined JDK_BIN call :tentar_jdk "%%~fD\bin\"
+if not defined JDK_BIN for /f "tokens=1,* delims==" %%A in ('java -XshowSettings:properties -version 2^>^&1 ^| findstr /C:"java.home ="') do if not defined JDK_BIN for /f "tokens=* delims= " %%D in ("%%B") do call :tentar_jdk "%%D\bin\"
 if not defined JDK_BIN goto :sem_jdk
-for %%E in (java.exe javac.exe jpackage.exe) do if not exist "%JDK_BIN%%%E" goto :sem_jdk
-for %%M in (java.base.jmod java.desktop.jmod) do if not exist "%JDK_BIN%..\jmods\%%M" goto :sem_jdk
+echo JDK selecionado: "%JDK_BIN%.."
+"%JDK_BIN%java.exe" -version
 
 if not exist "src\ValidadorLaboratorios.java" goto :sem_fontes
 if not exist "configuracoes\*.json" goto :sem_fontes
@@ -73,8 +77,12 @@ pause
 exit /b 0
 
 :sem_jdk
-echo ERRO: Instale um JDK 17 ou superior completo, incluindo javac.exe, jpackage.exe e a pasta jmods, na maquina que gera o programa.
-echo Confira JAVA_HOME ou coloque o bin do JDK no PATH.
+echo ERRO: Java para executar JARs foi encontrado, mas nenhum JDK completo para gerar o pacote foi localizado.
+echo Confira JAVA_HOME e se a instalacao inclui javac.exe, jpackage.exe e jmods\java.desktop.jmod.
+echo Caminhos detectados nesta maquina:
+where java.exe 2>nul
+where javac.exe 2>nul
+where jpackage.exe 2>nul
 goto :falha
 
 :sem_fontes
@@ -85,3 +93,13 @@ goto :falha
 echo Falha ao gerar a versao portatil. Confira a mensagem acima.
 pause
 exit /b 1
+
+:tentar_jdk
+if defined JDK_BIN exit /b 0
+if not exist "%~1java.exe" exit /b 0
+if not exist "%~1javac.exe" exit /b 0
+if not exist "%~1jpackage.exe" exit /b 0
+if not exist "%~1..\jmods\java.base.jmod" exit /b 0
+if not exist "%~1..\jmods\java.desktop.jmod" exit /b 0
+set "JDK_BIN=%~1"
+exit /b 0
