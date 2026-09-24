@@ -16,6 +16,8 @@ J:\C\Certificação Imagem\Validador\ValidadorLaboratorios-portatil\ValidadorLab
 
 O computador cliente não precisa instalar Java. Também é possível executar `executar_portatil.bat` dentro da pasta portátil; ele usa o Java incluído em `runtime`, sem depender da associação de arquivos `.jar` do Windows. Para atualizar o programa, gere a pasta novamente no computador de compilação. `executar_jar.bat` abre a versão portátil quando ela existir; caso contrário, usa o JAR com o Java instalado. O arquivo `.exe` antigo e o `.jar` na pasta `Validador` continuam sendo arquivos diferentes da versão portátil.
 
+Se a geração informar que não encontrou um JDK completo, confira `where java`, `where javac` e `where jpackage` no Prompt de Comando. `java --version` verifica apenas a execução de Java; para gerar o pacote, a máquina de compilação precisa de um JDK com `javac.exe`, `jpackage.exe` e a pasta `jmods`. Se o JDK estiver instalado fora dos caminhos comuns, defina `JAVA_HOME` para a pasta principal do JDK e execute novamente o `.bat`.
+
 Para conferir a ativação no cliente usando o runtime empacotado, execute no terminal a partir da pasta portátil:
 
 ```bat
