@@ -32,6 +32,6 @@ O `.jar` não elimina a necessidade de validação pelas políticas de seguranç
 
 Cada arquivo JSON define `codigo`, `laboratorio`, `descricao` e `softwares`. Cada software ativo tem `nome`, `categoria` e uma lista de `caminhos` alternativos. O campo `ativo: false` ignora o item. Driver de vídeo e ativação do Windows são verificados em todos os perfis.
 
-## Versão Python anterior
+## Executar pelo VS Code
 
-`validador_conformidade.py`, `executar_validador.bat`, `gerar_exe.bat` e `requirements.txt` permanecem disponíveis para a transição. O gerador Python cria o `.exe` em `dist` e usa os mesmos JSONs.
+Você pode iniciar `src/ValidadorLaboratorios.java` no VS Code. O programa procura os JSONs na pasta `configuracoes` do projeto, inclusive quando o editor usa `src` como diretório de execução. Para distribuir, use o arquivo gerado por `gerar_jar.bat`.
