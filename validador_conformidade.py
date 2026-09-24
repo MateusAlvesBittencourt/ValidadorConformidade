@@ -763,7 +763,7 @@ class ValidadorConformidade(tk.Tk):
     ) -> None:
         super().__init__()
 
-        self.title("Validador de Laboratórios - TI")
+        self.title("ValidadorLaboratorios")
         self.geometry("1060x760")
         self.minsize(900, 640)
         self.configure(bg=PALETAS["claro"]["fundo"])
@@ -877,7 +877,7 @@ class ValidadorConformidade(tk.Tk):
         ttk.Label(textos, text="OPERAÇÕES DE TI", style="Eyebrow.TLabel").pack(anchor="w")
         ttk.Label(
             textos,
-            text="Validador de conformidade",
+            text="ValidadorLaboratorios",
             style="Header.TLabel",
         ).pack(anchor="w", pady=(3, 2))
         ttk.Label(
