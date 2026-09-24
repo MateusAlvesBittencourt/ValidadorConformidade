@@ -9,7 +9,7 @@
     {
       "nome": "7-Zip",
       "categoria": "Utilitário",
-      "ativo": true,
+      "ativo": false,
       "caminhos": [
         "C:\\Program Files\\7-Zip\\7zFM.exe"
       ]
@@ -49,50 +49,42 @@
       ]
     },
     {
-      "nome": "Autodesk 3DS Max 2025",
+      "nome": "Autodesk 3DS Max 2026",
       "categoria": "CAD / BIM",
       "ativo": true,
       "caminhos": [
-        "C:\\Program Files\\Autodesk\\3ds Max 2025\\3dsmax.exe"
+        "C:\\Program Files\\Autodesk\\3ds Max 2026\\3dsmax.exe"
       ]
     },
     {
-      "nome": "Autodesk AutoCAD 2025",
+      "nome": "Autodesk AutoCAD 2026",
       "categoria": "CAD / BIM",
       "ativo": true,
       "caminhos": [
-        "C:\\Program Files\\Autodesk\\AutoCAD 2025\\acad.exe",
-        "C:\\Arquivos de Programas\\Autodesk\\AutoCAD 2025\\acad.exe"
+        "C:\\Program Files\\Autodesk\\AutoCAD 2026\\acad.exe",
+        "C:\\Arquivos de Programas\\Autodesk\\AutoCAD 2026\\acad.exe"
       ]
     },
     {
-      "nome": "Autodesk Inventor Professional 2025",
+      "nome": "Autodesk Inventor Professional 2026",
       "categoria": "CAD / BIM",
       "ativo": true,
       "caminhos": [
-        "C:\\Program Files\\Autodesk\\Inventor 2025\\Bin\\Inventor.exe"
+        "C:\\Program Files\\Autodesk\\Inventor 2026\\Bin\\Inventor.exe"
       ]
     },
     {
-      "nome": "Autodesk Revit 2025",
+      "nome": "Autodesk Revit 2026",
       "categoria": "CAD / BIM",
       "ativo": true,
       "caminhos": [
-        "C:\\Program Files\\Autodesk\\Revit 2025\\Revit.exe"
-      ]
-    },
-    {
-      "nome": "CODESYS V3.5.11",
-      "categoria": "Engenharia",
-      "ativo": true,
-      "caminhos": [
-        "C:\\Program Files (x86)\\Eaton\\XSOFT-CODESYS-3\\CODESYS\\Common\\XSoft3.exe"
+        "C:\\Program Files\\Autodesk\\Revit 2026\\Revit.exe"
       ]
     },
     {
       "nome": "Coolpack",
       "categoria": "Engenharia",
-      "ativo": true,
+      "ativo": false,
       "caminhos": [
         "C:\\Program Files\\Coolpack\\CoolPack.exe"
       ]
@@ -132,7 +124,7 @@
     {
       "nome": "EnergyPlus",
       "categoria": "Engenharia",
-      "ativo": true,
+      "ativo": false,
       "caminhos": [
         "C:\\EnergyPlusV24-1-0\\EP-Launch.exe"
       ]
@@ -167,7 +159,7 @@
       "categoria": "Engenharia",
       "ativo": true,
       "caminhos": [
-        "C:\\GAMS\\48\\studio\\studio.exe"
+        "C:\\GAMS\\50\\studio\\studio.exe"
       ]
     },
     {
@@ -175,7 +167,7 @@
       "categoria": "Desenvolvimento",
       "ativo": true,
       "caminhos": [
-        "C:\\Program Files\\GNU Octave\\Octave-9.1.0\\octave-launch.exe"
+        "C:\\Program Files\\GNU Octave\\Octave-10.2.0\\octave-launch.exe"
       ]
     },
     {
@@ -188,19 +180,20 @@
       ]
     },
     {
+      "nome": "Google  Earth Pro",
+      "categoria": "Engenharia",  
+    "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Google\\Google Earth Pro\\client\\googleearth.exe",
+        "C:\\Program Files (x86)\\Google\\Google Earth Pro\\client\\googleearth.exe"
+      ]
+    },
+    {
       "nome": "ImageJ",
       "categoria": "Multimídia",
       "ativo": true,
       "caminhos": [
         "C:\\Program Files\\ImageJ\\ImageJ.exe"
-      ]
-    },
-    {
-      "nome": "Inkscape",
-      "categoria": "Multimídia",
-      "ativo": true,
-      "caminhos": [
-        "C:\\Program Files\\Inkscape\\bin\\inkscape.exe"
       ]
     },
     {
@@ -214,27 +207,11 @@
       ]
     },
     {
-      "nome": "Laboratorio de Reatores",
-      "categoria": "Engenharia",
-      "ativo": true,
-      "caminhos": [
-        "C:\\Program Files\\Laboratorio de Reatores\\Laboratorio de Reatores.exe"
-      ]
-    },
-    {
       "nome": "MATLAB",
       "categoria": "Desenvolvimento",
       "ativo": true,
       "caminhos": [
         "C:\\Program Files\\MATLAB\\R2012b\\bin\\matlab.exe"
-      ]
-    },
-    {
-      "nome": "Mendeley Desktop",
-      "categoria": "Produtividade",
-      "ativo": true,
-      "caminhos": [
-        "C:\\Program Files (x86)\\Mendeley Desktop\\MendeleyDesktop.exe"
       ]
     },
     {
@@ -326,7 +303,7 @@
       "categoria": "CAD / BIM",
       "ativo": true,
       "caminhos": [
-        "C:\\Program Files\\PTC\\Creo 7.0.1.0\\Layout\\bin\\layout.exe"
+        "C:\\Program Files\\PTC\\Creo 11.0.3.0\\Parametric\\bin\\parametric.exe"
       ]
     },
     {
@@ -339,19 +316,11 @@
       ]
     },
     {
-      "nome": "Reatores Quimicos",
-      "categoria": "Engenharia",
-      "ativo": true,
-      "caminhos": [
-        "C:\\Program Files\\Reatores Quimicos\\Ecology\\Ecology.exe"
-      ]
-    },
-    {
       "nome": "Scilab",
       "categoria": "Engenharia",
       "ativo": true,
       "caminhos": [
-        "C:\\Program Files\\scilab-2024.0.0\\bin\\WScilex.exe"
+        "C:\\Program Files\\scilab-2025.1.0\\bin\\WScilex.exe"
       ]
     },
     {
@@ -360,46 +329,6 @@
       "ativo": true,
       "caminhos": [
         "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\SOLIDWORKS 2023\\SOLIDWORKS 2023.lnk"
-      ]
-    },
-    {
-      "nome": "SOLIDWORKS Composer 2023",
-      "categoria": "CAD / BIM",
-      "ativo": true,
-      "caminhos": [
-        "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\SOLIDWORKS 2023\\SOLIDWORKS Composer 2023\\SOLIDWORKS Composer 2023.lnk"
-      ]
-    },
-    {
-      "nome": "SOLIDWORKS Composer Player 2023",
-      "categoria": "CAD / BIM",
-      "ativo": true,
-      "caminhos": [
-        "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\SOLIDWORKS 2023\\SOLIDWORKS Composer 2023\\SOLIDWORKS Composer Player 2023.lnk"
-      ]
-    },
-    {
-      "nome": "SOLIDWORKS Electrical 2023",
-      "categoria": "CAD / BIM",
-      "ativo": true,
-      "caminhos": [
-        "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\SOLIDWORKS 2023\\SOLIDWORKS Electrical.lnk"
-      ]
-    },
-    {
-      "nome": "SOLIDWORKS Manage 2023",
-      "categoria": "CAD / BIM",
-      "ativo": true,
-      "caminhos": [
-        "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\SOLIDWORKS 2023\\SOLIDWORKS Manage 2023.lnk"
-      ]
-    },
-    {
-      "nome": "SOLIDWORKS Visualize 2023",
-      "categoria": "CAD / BIM",
-      "ativo": true,
-      "caminhos": [
-        "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\SOLIDWORKS 2023\\SOLIDWORKS Visualize 2023.lnk"
       ]
     },
     {
@@ -424,6 +353,14 @@
       "ativo": true,
       "caminhos": [
         "C:\\Program Files (x86)\\EMSO\\vrtherm\\vrtherm.exe"
+      ]
+    },
+    {
+      "nome": "GNU radio conda",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Users\\Public\\Desktop\\radioconda\\GNU Radio Filter Design Tool.lnk"
       ]
     },
     {
