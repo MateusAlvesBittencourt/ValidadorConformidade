@@ -32,11 +32,11 @@ if not exist ".venv\Scripts\python.exe" (
 ".venv\Scripts\python.exe" -m pip install -r requirements.txt pyinstaller
 if errorlevel 1 goto :falha
 
-".venv\Scripts\python.exe" -m PyInstaller --noconfirm --clean --onefile --windowed --name ValidadorConformidade --add-data "configuracoes;configuracoes" validador_conformidade.py
+".venv\Scripts\python.exe" -m PyInstaller --noconfirm --clean --onefile --windowed --name ValidadorLaboratorios --add-data "configuracoes;configuracoes" validador_conformidade.py
 if errorlevel 1 goto :falha
 
 echo.
-echo EXE gerado em: "%~dp0dist\ValidadorConformidade.exe"
+echo EXE gerado em: "%~dp0dist\ValidadorLaboratorios.exe"
 echo Na maquina cliente, copie apenas esse EXE. Python nao e necessario.
 pause
 exit /b 0
