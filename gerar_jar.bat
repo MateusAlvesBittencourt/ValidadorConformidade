@@ -3,7 +3,14 @@ chcp 65001 >nul
 setlocal
 cd /d "%~dp0"
 
-where javac >nul 2>&1
+set "JAVA_BUILD=java"
+set "JAVAC_BUILD=javac"
+if defined JAVA_HOME if exist "%JAVA_HOME%\bin\javac.exe" if exist "%JAVA_HOME%\bin\java.exe" (
+    set "JAVAC_BUILD=%JAVA_HOME%\bin\javac.exe"
+    set "JAVA_BUILD=%JAVA_HOME%\bin\java.exe"
+)
+
+where "%JAVAC_BUILD%" >nul 2>&1
 if errorlevel 1 (
     echo ERRO: Instale um JDK 17 ou superior neste computador. O comando javac nao foi encontrado.
     pause
@@ -19,13 +26,17 @@ if not exist "configuracoes\*.json" (
 if not exist "build\java" mkdir "build\java"
 if not exist "dist" mkdir "dist"
 
-javac --release 17 -encoding UTF-8 -d "build\java" "src\ValidadorLaboratorios.java"
+"%JAVAC_BUILD%" --release 17 -encoding UTF-8 -d "build\java" "src\ValidadorLaboratorios.java"
 if errorlevel 1 goto :falha
 
-jar --create --file "dist\ValidadorLaboratorios.jar" --main-class ValidadorLaboratorios -C "build\java" . -C . configuracoes
-if errorlevel 1 goto :falha
+"%JAVA_BUILD%" -m jdk.jartool/sun.tools.jar.Main --create --file "dist\ValidadorLaboratorios.jar" --main-class ValidadorLaboratorios -C "build\java" . -C . configuracoes
+if errorlevel 1 (
+    echo ERRO: O Java usado para compilar nao possui o modulo jdk.jartool.
+    echo Verifique JAVA_HOME ou instale um JDK 17 ou superior completo.
+    goto :falha
+)
 
-java -jar "dist\ValidadorLaboratorios.jar" --check-config
+"%JAVA_BUILD%" -jar "dist\ValidadorLaboratorios.jar" --check-config
 if errorlevel 1 goto :falha
 
 echo.
