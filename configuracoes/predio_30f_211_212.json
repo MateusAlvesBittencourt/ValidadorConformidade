@@ -112,6 +112,14 @@
       ]
     },
     {
+      "nome": "Dosvox",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Winvox\\dosvox.exe"
+      ]
+    },
+    {
       "nome": "Eletrobras CEPEL",
       "categoria": "Engenharia",
       "ativo": true,
@@ -178,6 +186,14 @@
       ]
     },
     {
+      "nome": "Google Earth Pro",
+      "categoria": "Multimídia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\Google\\Google Earth Pro\\client\\googleearth.exe"
+      ]
+    },
+    {
       "nome": "ImageJ",
       "categoria": "Multimídia",
       "ativo": true,
@@ -204,12 +220,11 @@
       ]
     },
     {
-      "nome": "Microsoft Office",
+      "nome": "Microsoft Office Access",
       "categoria": "Produtividade",
       "ativo": true,
       "caminhos": [
-        "C:\\Program Files\\Microsoft Office\\root\\Office16\\POWERPNT.EXE",
-        "C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\POWERPNT.EXE"
+        "C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\MSACCESS.EXE"
       ]
     },
     {
@@ -358,6 +373,30 @@
       "ativo": true,
       "caminhos": [
         "C:\\Program Files (x86)\\SPSSInc\\Statistics17\\statistics.exe"
+      ]
+    },
+    {
+      "nome": "R for Windows",
+      "categoria": "Análise de dados",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Program Files\\R\\R-4.5.1\\bin\\x64\\R.exe"
+      ]
+    },
+    {
+      "nome":"RStudio",
+      "categoria":"Análise de dados",
+      "ativo":true,
+      "caminhos":[
+        "C:\\Program Files\\RStudio\\rstudio.exe"
+      ]
+    },
+    {
+      "nome": "GNU Radio conda",
+      "categoria": "Engenharia",
+      "ativo": true,
+      "caminhos": [
+        "C:\\Users\\Public\\Desktop\\radioconda\\GNU Radio Filter Design Tool.lnk"
       ]
     },
     {
