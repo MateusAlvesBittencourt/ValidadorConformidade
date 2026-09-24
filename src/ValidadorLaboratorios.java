@@ -4,6 +4,7 @@ import java.awt.*;
 import java.net.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.charset.Charset;
 import java.nio.file.*;
 import java.text.Normalizer;
 import java.time.LocalDateTime;
@@ -359,34 +360,64 @@ public final class ValidadorLaboratorios extends JFrame {
     }
     private static Resultado verificarAtivacao() {
         if (!windows()) return new Resultado("erro", "Verificação disponível somente no Windows");
+        String falhaCim;
         try {
             String cmd = "[Console]::OutputEncoding=[Text.Encoding]::UTF8; $ErrorActionPreference='Stop'; " +
                 "$p=@(Get-CimInstance -Namespace root/cimv2 -ClassName SoftwareLicensingProduct -Filter \"ApplicationID='55c92734-d682-4d71-983e-d6ec3f16059f' AND PartialProductKey IS NOT NULL\" | Select-Object Name,Description,LicenseStatus,GracePeriodRemaining); ConvertTo-Json -InputObject $p -Compress -Depth 3";
             List<Map<String,Object>> produtos = objetos(Json.parse(powershell(cmd,20)));
-            if (produtos.isEmpty()) return ativacaoSlmgr();
             for (var p : produtos) if (numero(p.get("LicenseStatus"),-1)==1)
                 return new Resultado("conforme", valor(p,"Name") + " — Ativado" + (normal(valor(p,"Description")).contains("kmsclient") ? " — KMS" : ""));
             int estado = -1; for (var p : produtos) { int n=numero(p.get("LicenseStatus"),-1); if (n>=0 && n<=6) {estado=n;break;} }
             String[] estados = {"Windows não licenciado", "Windows ativado", "Windows em período de tolerância inicial", "Windows em período de tolerância adicional", "Windows em período de tolerância por licença não genuína", "Windows em modo de notificação", "Windows em período de tolerância estendido"};
-            return estado<0 ? ativacaoSlmgr() : new Resultado("falha", estados[estado]);
-        } catch (IOException | InterruptedException | IllegalArgumentException e) { return ativacaoSlmgr(); }
+            if (estado>=0) return new Resultado("falha", estados[estado]);
+            falhaCim = produtos.isEmpty() ? "Nenhum produto Windows retornado" : "Estado da licença ausente";
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            return new Resultado("erro", "Consulta da ativação interrompida");
+        } catch (IOException | IllegalArgumentException e) { falhaCim = resumo(e.getMessage()); }
+        return ativacaoSlmgr(falhaCim);
     }
-    private static Resultado ativacaoSlmgr() {
+    private static Resultado ativacaoSlmgr(String falhaCim) {
         try {
-            String cmd = "[Console]::OutputEncoding=[Text.Encoding]::UTF8; $ErrorActionPreference='Stop'; $saida=@(& \"$env:SystemRoot\\System32\\cscript.exe\" //Nologo \"$env:SystemRoot\\System32\\slmgr.vbs\" /dli 2>&1); $r=[PSCustomObject]@{ExitCode=$LASTEXITCODE; Output=($saida -join \"`n\")}; ConvertTo-Json -InputObject $r -Compress";
-            Map<String,Object> r = mapa((Map<?,?>)Json.parse(powershell(cmd,25)));
-            if (numero(r.get("ExitCode"),-1)!=0) throw new IOException("SLMGR falhou");
-            String saida=normal(valor(r,"Output"));
-            for (String s : List.of("unlicensed", "nao licenciado", "notification", "notificacao", "not activated", "nao ativado", "grace", "tolerancia")) if (saida.contains(s)) return new Resultado("falha", "Windows não ativado ou em período de tolerância");
-            for (String s : List.of("license status: licensed", "status da licenca: licenciado", "estado da licenca: licenciado", "permanently activated", "permanentemente ativado", "permanentemente ativada")) if (saida.contains(s)) return new Resultado("conforme", "Windows ativado — verificado pelo SLMGR");
-            return new Resultado("erro", "Estado da ativação retornado pelo Windows não foi reconhecido");
-        } catch (IOException | InterruptedException | IllegalArgumentException | ClassCastException e) { return new Resultado("erro", "Não foi possível consultar a ativação do Windows"); }
+            String raiz = System.getenv("SystemRoot");
+            if (raiz == null || raiz.isBlank()) raiz = System.getenv("WINDIR");
+            if (raiz == null || raiz.isBlank()) throw new IOException("Variável SystemRoot indisponível");
+            Path pasta = Path.of(raiz, "System32");
+            Process p = new ProcessBuilder(pasta.resolve("cscript.exe").toString(), "//Nologo",
+                pasta.resolve("slmgr.vbs").toString(), "/dli").redirectErrorStream(true).start();
+            if (!p.waitFor(25, TimeUnit.SECONDS)) { p.destroyForcibly(); throw new IOException("Tempo esgotado no SLMGR"); }
+            String original = new String(p.getInputStream().readAllBytes(), Charset.defaultCharset()).trim();
+            if (p.exitValue()!=0) throw new IOException("Código " + p.exitValue() + ": " + resumo(original));
+            if (original.isBlank()) throw new IOException("SLMGR não retornou informações");
+            String saida=normal(original);
+            for (String linha : saida.split("\\R")) {
+                int separador = linha.indexOf(':');
+                if (separador < 0) continue;
+                String rotulo = linha.substring(0,separador), estado = linha.substring(separador+1).trim();
+                if (!rotulo.contains("licen") || (!rotulo.contains("status") && !rotulo.contains("estado"))) continue;
+                if (estado.equals("licensed") || estado.equals("licenciado"))
+                    return new Resultado("conforme", "Windows ativado — verificado pelo SLMGR");
+                if (!estado.isBlank()) return new Resultado("falha", "Windows não ativado — SLMGR: " + resumo(estado));
+            }
+            throw new IOException("Estado de licença não reconhecido: " + resumo(original));
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            return new Resultado("erro", "Consulta da ativação interrompida");
+        } catch (IOException | IllegalArgumentException e) {
+            return new Resultado("erro", "CIM: " + falhaCim + "; SLMGR: " + resumo(e.getMessage()));
+        }
+    }
+    private static String resumo(String texto) {
+        if (texto == null || texto.isBlank()) return "sem detalhes";
+        String linha = texto.replaceAll("\\s+", " ").trim();
+        return linha.length() > 180 ? linha.substring(0,180) + "..." : linha;
     }
     private static String powershell(String script, int segundos) throws IOException, InterruptedException {
         Process p = new ProcessBuilder("powershell.exe", "-NoLogo", "-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-Command", script).redirectErrorStream(true).start();
         boolean terminou = p.waitFor(segundos, TimeUnit.SECONDS); if (!terminou) { p.destroyForcibly(); throw new IOException("Tempo esgotado"); }
         String resposta = new String(p.getInputStream().readAllBytes(), StandardCharsets.UTF_8).replaceFirst("^\\uFEFF", "").trim();
-        if (p.exitValue()!=0 || resposta.isBlank()) throw new IOException("Falha PowerShell"); return resposta;
+        if (p.exitValue()!=0) throw new IOException("PowerShell (" + p.exitValue() + "): " + resumo(resposta));
+        if (resposta.isBlank()) throw new IOException("PowerShell não retornou dados"); return resposta;
     }
     private static String host() { try {return InetAddress.getLocalHost().getHostName();} catch (UnknownHostException e){return "LOCAL";} }
     private static String ipPrincipal() {
@@ -470,6 +501,12 @@ public final class ValidadorLaboratorios extends JFrame {
         return new Leitura(labs,avisos);
     }
     public static void main(String[] args) {
+        if (args.length>0 && args[0].equals("--check-activation")) {
+            Resultado resultado=verificarAtivacao();
+            System.out.println(resultado.estado() + ": " + resultado.detalhe());
+            if (resultado.estado().equals("erro")) System.exit(2);
+            return;
+        }
         try { Leitura labs=configuracoes();
             if (args.length>0 && args[0].equals("--check-config")) {System.out.println("Configurações válidas: "+labs.laboratorios().size()); for(String aviso:labs.avisos())System.err.println(aviso);return;}
             SwingUtilities.invokeLater(() -> new ValidadorLaboratorios(labs));
