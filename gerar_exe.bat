@@ -1,4 +1,5 @@
 @echo off
+chcp 65001 >nul
 setlocal
 cd /d "%~dp0"
 
@@ -37,7 +38,29 @@ if errorlevel 1 goto :falha
 
 echo.
 echo EXE gerado em: "%~dp0dist\ValidadorLaboratorios.exe"
-echo Na maquina cliente, copie apenas esse EXE. Python nao e necessario.
+set "DESTINO=J:\C\Certificação Imagem\Validador"
+if not exist "J:\" (
+    echo AVISO: A unidade J: nao esta acessivel. O EXE continua disponivel na pasta dist.
+    pause
+    exit /b 1
+)
+if not exist "%DESTINO%\" (
+    mkdir "%DESTINO%"
+    if errorlevel 1 (
+        echo ERRO: Nao foi possivel criar a pasta "%DESTINO%".
+        pause
+        exit /b 1
+    )
+)
+copy /Y "%~dp0dist\ValidadorLaboratorios.exe" "%DESTINO%\ValidadorLaboratorios.exe" >nul
+if errorlevel 1 (
+    echo ERRO: Falha ao copiar o EXE para "%DESTINO%".
+    echo A versao gerada permanece na pasta dist.
+    pause
+    exit /b 1
+)
+echo EXE copiado para: "%DESTINO%\ValidadorLaboratorios.exe"
+echo Na maquina cliente, Python nao e necessario.
 pause
 exit /b 0
 
