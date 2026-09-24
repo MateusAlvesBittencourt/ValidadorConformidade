@@ -47,6 +47,8 @@ public final class ValidadorLaboratorios extends JFrame {
     private boolean escuro = false;
     private boolean trabalhando = false;
     private JPanel raiz;
+    private final Set<JPanel> paineisFundo = new HashSet<>();
+    private JPanel blocoTabela;
     private JPanel[] cartoes;
 
     private ValidadorLaboratorios(Leitura leitura) {
@@ -65,7 +67,7 @@ public final class ValidadorLaboratorios extends JFrame {
         JLabel l = new JLabel(texto); l.setFont(new Font("Segoe UI", negrito ? Font.BOLD : Font.PLAIN, tamanho)); return l;
     }
     private JPanel cartao(String texto, JLabel valor) {
-        JPanel p = painel(new BorderLayout(4, 8)); p.setBorder(BorderFactory.createEmptyBorder(14, 16, 14, 16));
+        JPanel p = painel(new BorderLayout(4, 8)); p.setPreferredSize(new Dimension(200, 104));
         p.add(rotulo(texto.toUpperCase(Locale.ROOT), 11, true), BorderLayout.NORTH);
         valor.setFont(new Font("Segoe UI", Font.BOLD, 17));
         JPanel linha = painel(new BorderLayout()); linha.add(valor, BorderLayout.CENTER);
@@ -75,6 +77,7 @@ public final class ValidadorLaboratorios extends JFrame {
     private void construir() {
         raiz = painel(new BorderLayout(0, 16)); raiz.setBorder(BorderFactory.createEmptyBorder(22, 26, 18, 26)); setContentPane(raiz);
         JPanel cima = painel(new BorderLayout(0, 16)); raiz.add(cima, BorderLayout.NORTH);
+        paineisFundo.add(raiz); paineisFundo.add(cima);
         JPanel cabecalho = painel(new BorderLayout()); cima.add(cabecalho, BorderLayout.NORTH);
         JPanel textos = painel(new GridLayout(3, 1, 0, 2));
         textos.add(rotulo("OPERAÇÕES DE TI", 11, true)); titulo.setFont(new Font("Segoe UI", Font.BOLD, 23)); textos.add(titulo);
@@ -94,19 +97,52 @@ public final class ValidadorLaboratorios extends JFrame {
             JButton detalhes = new JButton("Ver detalhes"); detalhes.addActionListener(e -> JOptionPane.showMessageDialog(this, String.join("\n", leitura.avisos()), "Configurações ignoradas", JOptionPane.WARNING_MESSAGE));
             aviso.add(detalhes, BorderLayout.EAST); cima.add(aviso, BorderLayout.SOUTH);
         }
-        JPanel resumo = painel(new GridLayout(1, 4, 10, 0)); raiz.add(resumo, BorderLayout.CENTER);
+        JPanel meio = painel(new BorderLayout(0, 16)); raiz.add(meio, BorderLayout.CENTER);
+        JPanel resumo = painel(new GridLayout(1, 4, 10, 0)); meio.add(resumo, BorderLayout.NORTH);
+        paineisFundo.add(meio); paineisFundo.add(resumo);
         cartoes = new JPanel[]{cartao("Status geral", geral), cartao("Conformes", conformes), cartao("Não conformes", falhas), cartao("IPv4 do dispositivo", ip)};
         for (JPanel p : cartoes) resumo.add(p);
-        JPanel parteBaixa = painel(new BorderLayout(0, 10)); raiz.add(parteBaixa, BorderLayout.SOUTH);
-        JPanel blocoTabela = painel(new BorderLayout(0, 12)); blocoTabela.setBorder(BorderFactory.createEmptyBorder(16, 16, 14, 16));
+        blocoTabela = painel(new BorderLayout(0, 12)); meio.add(blocoTabela, BorderLayout.CENTER);
         JPanel barra = painel(new BorderLayout()); JPanel nome = painel(new FlowLayout(FlowLayout.LEFT, 8, 0));
         nome.add(rotulo("Itens monitorados", 16, true)); nome.add(quantidade); barra.add(nome, BorderLayout.WEST);
         barra.add(validar, BorderLayout.EAST); blocoTabela.add(barra, BorderLayout.NORTH);
-        tabela.setRowHeight(34); tabela.setFillsViewportHeight(true); tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tabela.setRowHeight(38); tabela.setFillsViewportHeight(true); tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tabela.setShowGrid(false); tabela.setIntercellSpacing(new Dimension(0, 0));
+        tabela.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        tabela.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 11));
+        tabela.getTableHeader().setPreferredSize(new Dimension(0, 38));
+        tabela.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean selected, boolean focused, int row, int column) {
+                JLabel cell = (JLabel) super.getTableCellRendererComponent(table, value, selected, focused, row, column);
+                String status = Objects.toString(table.getValueAt(row, 3), "");
+                Color texto = cor(escuro ? "#F5F7FA" : "#172033");
+                Color corStatus = cor(escuro ? "#A8B3C5" : "#667085");
+                Color fundo = cor(escuro ? (row % 2 == 0 ? "#151E2F" : "#1A263A") : (row % 2 == 0 ? "#FFFFFF" : "#F8FAFC"));
+                if (status.contains("Conforme")) {
+                    corStatus = cor(escuro ? "#47CD89" : "#087F4F");
+                    if (column == 3) fundo = cor(escuro ? "#173D31" : "#ECFDF3");
+                } else if (status.contains("Não encontrado")) {
+                    corStatus = cor(escuro ? "#FF766F" : "#B42318");
+                    if (column == 3) fundo = cor(escuro ? "#482523" : "#FEF3F2");
+                } else if (status.contains("Não verificado")) {
+                    corStatus = cor(escuro ? "#FDB022" : "#B54708");
+                    if (column == 3) fundo = cor(escuro ? "#493817" : "#FFFAEB");
+                } else if (status.contains("Verificando")) {
+                    corStatus = cor(escuro ? "#76A3FF" : "#155EEF");
+                    if (column == 3) fundo = cor(escuro ? "#1B315E" : "#E8F0FF");
+                }
+                cell.setBackground(selected ? cor(escuro ? "#254579" : "#DCEAFF") : fundo);
+                cell.setForeground(column == 3 ? corStatus : texto);
+                cell.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
+                cell.setToolTipText(Objects.toString(value, ""));
+                return cell;
+            }
+        });
         tabela.getColumnModel().getColumn(0).setPreferredWidth(220); tabela.getColumnModel().getColumn(1).setPreferredWidth(135);
         tabela.getColumnModel().getColumn(2).setPreferredWidth(390); tabela.getColumnModel().getColumn(3).setPreferredWidth(145);
-        JScrollPane scroll = new JScrollPane(tabela); scroll.setPreferredSize(new Dimension(900, 330)); blocoTabela.add(scroll, BorderLayout.CENTER);
-        parteBaixa.add(blocoTabela, BorderLayout.CENTER); JPanel rodape = painel(new FlowLayout(FlowLayout.RIGHT)); rodape.add(ultima); parteBaixa.add(rodape, BorderLayout.SOUTH);
+        JScrollPane scroll = new JScrollPane(tabela); scroll.setBorder(BorderFactory.createEmptyBorder()); blocoTabela.add(scroll, BorderLayout.CENTER);
+        JPanel rodape = painel(new FlowLayout(FlowLayout.RIGHT)); rodape.add(ultima); raiz.add(rodape, BorderLayout.SOUTH); paineisFundo.add(rodape);
         validar.setEnabled(false); validar.addActionListener(e -> validar());
         tema.addActionListener(e -> { escuro = !escuro; aplicarTema(); });
         copiar.addActionListener(e -> {
@@ -140,12 +176,22 @@ public final class ValidadorLaboratorios extends JFrame {
     }
     private static String textoStatus(String s) { return switch(s) {case "conforme" -> "✓ Conforme"; case "falha" -> "× Não encontrado"; case "erro" -> "⚠ Não verificado"; case "verificando" -> "◌ Verificando"; default -> "○ Pendente";}; }
     private void atualizarResumo() {
-        if (atual == null) { geral.setText("Selecione"); conformes.setText("—"); falhas.setText("—"); return; }
+        if (atual == null) { geral.setText("Selecione"); conformes.setText("—"); falhas.setText("—"); atualizarCoresResumo(); return; }
         Collection<Resultado> vals = resultados.getOrDefault(atual.codigo(), Map.of()).values();
         long ok = vals.stream().filter(r -> r.estado().equals("conforme")).count();
         long nao = vals.stream().filter(r -> r.estado().equals("falha") || r.estado().equals("erro")).count();
         conformes.setText(ok + " de " + itens().size()); falhas.setText("" + nao);
         geral.setText(trabalhando ? "Verificando" : ok + nao == 0 ? "Aguardando" : nao == 0 && ok == itens().size() ? "Em conformidade" : "Requer atenção");
+        atualizarCoresResumo();
+    }
+    private void atualizarCoresResumo() {
+        Color texto = cor(escuro ? "#F5F7FA" : "#172033");
+        Color azul = cor(escuro ? "#4C85FF" : "#155EEF");
+        Color verde = cor(escuro ? "#47CD89" : "#079455");
+        Color vermelho = cor(escuro ? "#FF766F" : "#D92D20");
+        conformes.setForeground(conformes.getText().equals("—") ? texto : verde);
+        falhas.setForeground(falhas.getText().equals("0") || falhas.getText().equals("—") ? texto : vermelho);
+        geral.setForeground(geral.getText().equals("Em conformidade") ? verde : geral.getText().equals("Requer atenção") ? vermelho : azul);
     }
     private void validar() {
         if (atual == null || trabalhando) return;
@@ -175,16 +221,31 @@ public final class ValidadorLaboratorios extends JFrame {
     private void aplicarTema() {
         Color fundo = cor(escuro ? "#0D1424" : "#F3F6FA"), superficie = cor(escuro ? "#151E2F" : "#FFFFFF");
         Color texto = cor(escuro ? "#F5F7FA" : "#172033"), azul = cor(escuro ? "#4C85FF" : "#155EEF");
-        raiz.setBackground(fundo); pintar(raiz, fundo, superficie, texto);
-        for (JPanel p : cartoes) p.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(cor(escuro ? "#2A3950" : "#DCE3EC")), BorderFactory.createEmptyBorder(13, 15, 13, 15)));
+        pintar(raiz, fundo, superficie, texto);
+        Color borda = cor(escuro ? "#2A3950" : "#DCE3EC");
+        Color[] destaques = {azul, cor(escuro ? "#47CD89" : "#079455"), cor(escuro ? "#FF766F" : "#D92D20"), azul};
+        for (int i = 0; i < cartoes.length; i++) {
+            cartoes[i].setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(borda, 1, true),
+                BorderFactory.createCompoundBorder(BorderFactory.createMatteBorder(0, 4, 0, 0, destaques[i]), BorderFactory.createEmptyBorder(12, 14, 12, 14))));
+        }
+        blocoTabela.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(borda, 1, true), BorderFactory.createEmptyBorder(16, 16, 14, 16)));
         titulo.setForeground(azul); tema.setText(escuro ? "☀  Tema claro" : "☾  Tema escuro");
-        tabela.setBackground(superficie); tabela.setForeground(texto); tabela.setSelectionBackground(cor(escuro ? "#1B315E" : "#E8F0FF"));
-        tabela.setSelectionForeground(texto); tabela.getTableHeader().setBackground(superficie); tabela.getTableHeader().setForeground(texto);
+        atualizarCoresResumo();
+        ip.setForeground(azul);
+        tabela.setBackground(superficie); tabela.setForeground(texto);
+        tabela.getTableHeader().setBackground(cor(escuro ? "#1A263A" : "#F8FAFC")); tabela.getTableHeader().setForeground(texto);
+        validar.setUI(new javax.swing.plaf.basic.BasicButtonUI());
+        validar.setBackground(azul); validar.setForeground(Color.WHITE); validar.setFocusPainted(false);
+        validar.setBorder(BorderFactory.createEmptyBorder(10, 18, 10, 18));
+        copiar.setUI(new javax.swing.plaf.basic.BasicButtonUI()); copiar.setBackground(cor(escuro ? "#1B315E" : "#E8F0FF"));
+        copiar.setForeground(azul); copiar.setBorder(BorderFactory.createEmptyBorder(6, 10, 6, 10));
+        quantidade.setForeground(azul); ultima.setForeground(cor(escuro ? "#A8B3C5" : "#667085"));
+        tabela.repaint(); revalidate();
         repaint();
     }
     private static Color cor(String hex) { return Color.decode(hex); }
     private void pintar(Component c, Color fundo, Color superficie, Color texto) {
-        if (c instanceof JPanel p) p.setBackground(p == raiz || p.getParent() == raiz || p.getParent() instanceof JPanel && p.getParent().getParent() == raiz ? fundo : superficie);
+        if (c instanceof JPanel p) p.setBackground(paineisFundo.contains(p) ? fundo : superficie);
         if (c instanceof JLabel l) l.setForeground(texto);
         if (c instanceof Container cont) for (Component filho : cont.getComponents()) pintar(filho, fundo, superficie, texto);
     }
