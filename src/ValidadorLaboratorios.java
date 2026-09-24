@@ -17,12 +17,12 @@ import java.util.jar.*;
 /** Versão Java do validador de laboratórios. Requer Java 17. */
 public final class ValidadorLaboratorios extends JFrame {
     private static final long serialVersionUID = 1L;
-    record Software(String nome, String categoria, List<String> caminhos) {}
+    record Software(String nome, String categoria, List<String> caminhos, List<String> appx) {}
     record Laboratorio(String codigo, String nome, String descricao, List<Software> softwares) {}
     record Resultado(String estado, String detalhe) {}
     record Leitura(List<Laboratorio> laboratorios, List<String> avisos) {}
-    private static final Software VIDEO = new Software("Driver de vídeo", "Hardware", List.of("Driver do fabricante (Intel, AMD ou NVIDIA)"));
-    private static final Software ATIVACAO = new Software("Ativação do Windows", "Sistema operacional", List.of("Windows ativado e licenciado"));
+    private static final Software VIDEO = new Software("Driver de vídeo", "Hardware", List.of("Driver do fabricante (Intel, AMD ou NVIDIA)"), List.of());
+    private static final Software ATIVACAO = new Software("Ativação do Windows", "Sistema operacional", List.of("Windows ativado e licenciado"), List.of());
     private final Leitura leitura;
     private final JComboBox<String> seletor = new JComboBox<>();
     private final DefaultTableModel modelo = new DefaultTableModel(new String[]{"ITEM", "CATEGORIA", "LOCAL IDENTIFICADO / ESPERADO", "STATUS"}, 0) {
@@ -294,6 +294,26 @@ public final class ValidadorLaboratorios extends JFrame {
                 }
             } catch (IOException | RuntimeException ignored) { }
         }
+        // Perfis externos mais antigos podem não ter a lista appx.
+        List<String> pacotes = s.appx().isEmpty() && s.nome().equalsIgnoreCase("Microsoft Teams")
+            ? List.of("MSTeams") : s.appx();
+        if (windows()) for (String pacote : pacotes) {
+            try {
+                String cmd = "[Console]::OutputEncoding=[Text.Encoding]::UTF8; $ErrorActionPreference='Stop'; " +
+                    "$p=@(Get-AppxPackage -Name '" + pacote + "' | Select-Object Name,InstallLocation); ConvertTo-Json -InputObject $p -Compress -Depth 2";
+                for (var instalado : objetos(Json.parse(powershell(cmd,20)))) {
+                    if (pacote.equalsIgnoreCase(valor(instalado,"Name"))) {
+                        String local = valor(instalado,"InstallLocation");
+                        return new Resultado("conforme", local.isBlank() ? "Pacote MSIX: " + pacote : local);
+                    }
+                }
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                return new Resultado("erro", "Consulta de aplicativos instalados interrompida");
+            } catch (IOException | IllegalArgumentException e) {
+                return new Resultado("erro", "Não foi possível consultar os aplicativos instalados (MSIX)");
+            }
+        }
         return new Resultado("falha", "");
     }
     private static String expandir(String s) {
@@ -308,7 +328,15 @@ public final class ValidadorLaboratorios extends JFrame {
         if (json instanceof List<?> lista) for (Object item : lista) if (item instanceof Map<?,?> m) saida.add(mapa(m)); return saida;
     }
     private static String valor(Map<String,Object> m, String chave) { return Objects.toString(m.get(chave), "").trim(); }
-    private static int numero(Object x, int padrao) { try { return Integer.parseInt(Objects.toString(x)); } catch (NumberFormatException e) { return padrao; } }
+    private static int numero(Object x, int padrao) {
+        if (x instanceof Number n) {
+            double valor = n.doubleValue();
+            return Double.isFinite(valor) && valor == Math.rint(valor) && valor >= Integer.MIN_VALUE && valor <= Integer.MAX_VALUE
+                ? (int) valor : padrao;
+        }
+        if (x instanceof String s) try { return Integer.parseInt(s.trim()); } catch (NumberFormatException ignored) { }
+        return padrao;
+    }
     private static Resultado verificarVideo() {
         if (!windows()) return new Resultado("erro", "Verificação disponível somente no Windows");
         try {
@@ -340,7 +368,7 @@ public final class ValidadorLaboratorios extends JFrame {
                 return new Resultado("conforme", valor(p,"Name") + " — Ativado" + (normal(valor(p,"Description")).contains("kmsclient") ? " — KMS" : ""));
             int estado = -1; for (var p : produtos) { int n=numero(p.get("LicenseStatus"),-1); if (n>=0 && n<=6) {estado=n;break;} }
             String[] estados = {"Windows não licenciado", "Windows ativado", "Windows em período de tolerância inicial", "Windows em período de tolerância adicional", "Windows em período de tolerância por licença não genuína", "Windows em modo de notificação", "Windows em período de tolerância estendido"};
-            return new Resultado("falha", estado<0 ? "Windows não ativado ou estado da licença desconhecido" : estados[estado]);
+            return estado<0 ? ativacaoSlmgr() : new Resultado("falha", estados[estado]);
         } catch (IOException | InterruptedException | IllegalArgumentException e) { return ativacaoSlmgr(); }
     }
     private static Resultado ativacaoSlmgr() {
@@ -390,7 +418,14 @@ public final class ValidadorLaboratorios extends JFrame {
             if (sn.equalsIgnoreCase(VIDEO.nome()) || sn.equalsIgnoreCase(ATIVACAO.nome()) || !vistos.add(sn.toLowerCase(Locale.ROOT))) throw new IllegalArgumentException("software duplicado ou reservado: " + sn);
             if (!(s.get("caminhos") instanceof List<?> lista) || lista.isEmpty()) throw new IllegalArgumentException(sn + ": caminhos deve ser lista não vazia");
             List<String> caminhos=new ArrayList<>(); for(Object c:lista) if (c instanceof String valor && !valor.isBlank()) caminhos.add(valor.trim()); else throw new IllegalArgumentException(sn + ": caminho inválido");
-            softwares.add(new Software(sn,cat,caminhos));
+            List<String> appx=new ArrayList<>();
+            Object pacotes=s.get("appx");
+            if (pacotes != null) {
+                if (!(pacotes instanceof List<?> nomes)) throw new IllegalArgumentException(sn + ": appx deve ser uma lista");
+                for (Object nome : nomes) if (nome instanceof String valor && valor.matches("[A-Za-z][A-Za-z0-9._-]*")) appx.add(valor);
+                    else throw new IllegalArgumentException(sn + ": nome de pacote appx inválido");
+            }
+            softwares.add(new Software(sn,cat,caminhos,appx));
         }
         if (softwares.isEmpty()) throw new IllegalArgumentException("nenhum software ativo");
         return new Laboratorio(codigo,lab,desc,softwares);
