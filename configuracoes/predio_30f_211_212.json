@@ -339,6 +339,9 @@
       "categoria": "Engenharia",
       "ativo": true,
       "caminhos": [
+        "C:\\Program Files\\QGIS 3.40.11\\bin\\qgis-ltr-bin.exe",
+        "C:\\Program Files\\QGIS 3.40.11\\bin\\qgis-bin.exe",
+        "C:\\Program Files\\QGIS 3.40.11\\apps\\qgis-ltr\\bin\\qgis-ltr-bin.exe",
         "C:\\Program Files\\QGIS *\\bin\\qgis*-bin.exe",
         "C:\\Program Files\\QGIS *\\apps\\qgis\\bin\\qgis*-bin.exe",
         "C:\\Program Files\\QGIS *\\apps\\qgis-ltr\\bin\\qgis*-bin.exe",
@@ -433,6 +436,8 @@
       "categoria": "Fonte",
       "ativo": true,
       "caminhos": [
+        "C:\\Windows\\Fonts\\OpenSans-VariableFont_wdth,wght.ttf",
+        "C:\\Windows\\Fonts\\OpenSans-Italic-VariableFont_wdth,wght.ttf",
         "C:\\Windows\\Fonts\\${n}*.ttf",
         "%LOCALAPPDATA%\\Microsoft\\Windows\\Fonts\\${n}*.ttf",
         "C:\\Windows\\Fonts\\${n}*.otf",
