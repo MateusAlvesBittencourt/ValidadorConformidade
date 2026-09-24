@@ -324,6 +324,9 @@ public final class ValidadorLaboratorios extends JFrame {
         } catch (Exception ignored) { /* Em execução pelo código-fonte, usar apenas JSONs externos. */ }
         Path externa=pastaAplicacao().resolve("configuracoes");
         if (!Files.isDirectory(externa)) externa=Path.of("configuracoes");
+        // O Code Runner do VS Code executa dentro de src; os perfis ficam no projeto.
+        if (!Files.isDirectory(externa) && Files.exists(Path.of("ValidadorLaboratorios.java")))
+            externa=Path.of("..", "configuracoes");
         if (Files.isDirectory(externa)) try(var stream=Files.list(externa)) {
             for (Path p : stream.filter(x -> x.getFileName().toString().toLowerCase(Locale.ROOT).endsWith(".json")).toList())
                 arquivos.put(p.getFileName().toString(), Files.readString(p,StandardCharsets.UTF_8));
