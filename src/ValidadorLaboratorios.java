@@ -16,6 +16,7 @@ import java.util.jar.*;
 
 /** Versão Java do validador de laboratórios. Requer Java 17. */
 public final class ValidadorLaboratorios extends JFrame {
+    private static final long serialVersionUID = 1L;
     record Software(String nome, String categoria, List<String> caminhos) {}
     record Laboratorio(String codigo, String nome, String descricao, List<Software> softwares) {}
     record Resultado(String estado, String detalhe) {}
@@ -25,6 +26,7 @@ public final class ValidadorLaboratorios extends JFrame {
     private final Leitura leitura;
     private final JComboBox<String> seletor = new JComboBox<>();
     private final DefaultTableModel modelo = new DefaultTableModel(new String[]{"ITEM", "CATEGORIA", "LOCAL IDENTIFICADO / ESPERADO", "STATUS"}, 0) {
+        @Override
         public boolean isCellEditable(int row, int column) { return false; }
     };
     private final JTable tabela = new JTable(modelo);
@@ -113,7 +115,7 @@ public final class ValidadorLaboratorios extends JFrame {
             copiar.setText("Copiado"); new javax.swing.Timer(1600, event -> { copiar.setText("Copiar"); ((javax.swing.Timer)event.getSource()).stop(); }).start();
         });
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("F5"), "validar");
-        getRootPane().getActionMap().put("validar", new AbstractAction(){public void actionPerformed(java.awt.event.ActionEvent e){validar();}});
+        getRootPane().getActionMap().put("validar", new AbstractAction(){@Override public void actionPerformed(java.awt.event.ActionEvent e){validar();}});
     }
     private List<Software> itens() {
         List<Software> lista = new ArrayList<>(); lista.add(VIDEO); lista.add(ATIVACAO);
@@ -151,15 +153,18 @@ public final class ValidadorLaboratorios extends JFrame {
         String codigo = atual.codigo(); Map<String, Resultado> mapa = resultados.computeIfAbsent(codigo, x -> new LinkedHashMap<>());
         for (Software s : itens()) mapa.put(s.nome(), new Resultado("verificando", "")); atualizarTabela(); atualizarResumo();
         new SwingWorker<Void, Map.Entry<String, Resultado>>() {
+            @Override
             protected Void doInBackground() {
                 for (Software s : itens()) {
                     Resultado r = s == VIDEO ? verificarVideo() : s == ATIVACAO ? verificarAtivacao() : verificarSoftware(s);
                     publish(Map.entry(s.nome(), r));
                 } return null;
             }
+            @Override
             protected void process(List<Map.Entry<String, Resultado>> entradas) {
                 for (var e : entradas) mapa.put(e.getKey(), e.getValue()); atualizarTabela(); atualizarResumo();
             }
+            @Override
             protected void done() {
                 trabalhando = false; validar.setText("Validar novamente"); validar.setEnabled(true); seletor.setEnabled(true);
                 String data = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy 'às' HH:mm:ss"));
@@ -189,7 +194,7 @@ public final class ValidadorLaboratorios extends JFrame {
             try {
                 if (Files.exists(Path.of(caminho))) return new Resultado("conforme", caminho);
                 if (caminho.indexOf('*') >= 0 || caminho.indexOf('?') >= 0) {
-                    Path p = Path.of(caminho); Path pai = p.getParent();
+                    Path p = Path.of(caminho);
                     // PathMatcher glob abrange componentes intermediários, como QGIS *.
                     Path raiz = p.getRoot(); Path inicio = raiz == null ? Path.of(".") : raiz;
                     int primeira = -1; for (int i=0; i<p.getNameCount(); i++) if (p.getName(i).toString().matches(".*[\\*\\?].*")) { primeira=i; break; }
@@ -220,7 +225,7 @@ public final class ValidadorLaboratorios extends JFrame {
         if (json instanceof List<?> lista) for (Object item : lista) if (item instanceof Map<?,?> m) saida.add(mapa(m)); return saida;
     }
     private static String valor(Map<String,Object> m, String chave) { return Objects.toString(m.get(chave), "").trim(); }
-    private static int numero(Object x, int padrao) { try { return Integer.parseInt(Objects.toString(x)); } catch (Exception e) { return padrao; } }
+    private static int numero(Object x, int padrao) { try { return Integer.parseInt(Objects.toString(x)); } catch (NumberFormatException e) { return padrao; } }
     private static Resultado verificarVideo() {
         if (!windows()) return new Resultado("erro", "Verificação disponível somente no Windows");
         try {
@@ -239,7 +244,7 @@ public final class ValidadorLaboratorios extends JFrame {
             }
             if (!problemas.isEmpty()) return new Resultado("falha", String.join("; ", problemas));
             return new Resultado("conforme", String.join("; ", ok));
-        } catch (Exception e) { return new Resultado("erro", "Não foi possível consultar o driver de vídeo"); }
+        } catch (IOException | InterruptedException | IllegalArgumentException e) { return new Resultado("erro", "Não foi possível consultar o driver de vídeo"); }
     }
     private static Resultado verificarAtivacao() {
         if (!windows()) return new Resultado("erro", "Verificação disponível somente no Windows");
@@ -253,7 +258,7 @@ public final class ValidadorLaboratorios extends JFrame {
             int estado = -1; for (var p : produtos) { int n=numero(p.get("LicenseStatus"),-1); if (n>=0 && n<=6) {estado=n;break;} }
             String[] estados = {"Windows não licenciado", "Windows ativado", "Windows em período de tolerância inicial", "Windows em período de tolerância adicional", "Windows em período de tolerância por licença não genuína", "Windows em modo de notificação", "Windows em período de tolerância estendido"};
             return new Resultado("falha", estado<0 ? "Windows não ativado ou estado da licença desconhecido" : estados[estado]);
-        } catch (Exception e) { return ativacaoSlmgr(); }
+        } catch (IOException | InterruptedException | IllegalArgumentException e) { return ativacaoSlmgr(); }
     }
     private static Resultado ativacaoSlmgr() {
         try {
@@ -264,7 +269,7 @@ public final class ValidadorLaboratorios extends JFrame {
             for (String s : List.of("unlicensed", "nao licenciado", "notification", "notificacao", "not activated", "nao ativado", "grace", "tolerancia")) if (saida.contains(s)) return new Resultado("falha", "Windows não ativado ou em período de tolerância");
             for (String s : List.of("license status: licensed", "status da licenca: licenciado", "estado da licenca: licenciado", "permanently activated", "permanentemente ativado", "permanentemente ativada")) if (saida.contains(s)) return new Resultado("conforme", "Windows ativado — verificado pelo SLMGR");
             return new Resultado("erro", "Estado da ativação retornado pelo Windows não foi reconhecido");
-        } catch (Exception e) { return new Resultado("erro", "Não foi possível consultar a ativação do Windows"); }
+        } catch (IOException | InterruptedException | IllegalArgumentException | ClassCastException e) { return new Resultado("erro", "Não foi possível consultar a ativação do Windows"); }
     }
     private static String powershell(String script, int segundos) throws IOException, InterruptedException {
         Process p = new ProcessBuilder("powershell.exe", "-NoLogo", "-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-Command", script).redirectErrorStream(true).start();
@@ -272,14 +277,14 @@ public final class ValidadorLaboratorios extends JFrame {
         String resposta = new String(p.getInputStream().readAllBytes(), StandardCharsets.UTF_8).replaceFirst("^\\uFEFF", "").trim();
         if (p.exitValue()!=0 || resposta.isBlank()) throw new IOException("Falha PowerShell"); return resposta;
     }
-    private static String host() { try {return InetAddress.getLocalHost().getHostName();} catch (Exception e){return "LOCAL";} }
+    private static String host() { try {return InetAddress.getLocalHost().getHostName();} catch (UnknownHostException e){return "LOCAL";} }
     private static String ipPrincipal() {
         try {
             List<NetworkInterface> interfaces = Collections.list(NetworkInterface.getNetworkInterfaces());
             interfaces.sort(Comparator.comparingInt(n -> normal(n.getDisplayName()).matches(".*(virtual|vmware|vbox|hyper-v|vethernet|loopback|docker|wsl).*") ? 1 : 0));
             for (NetworkInterface n : interfaces) if (n.isUp() && !n.isLoopback()) for (InetAddress a : Collections.list(n.getInetAddresses()))
                 if (a instanceof Inet4Address && !a.isLoopbackAddress() && !a.isLinkLocalAddress()) return a.getHostAddress();
-        } catch (Exception ignored) { } return "Não encontrado";
+        } catch (SocketException | SecurityException ignored) { } return "Não encontrado";
     }
     private static Map<String,Object> mapa(Map<?,?> objeto) {
         Map<String,Object> saida = new LinkedHashMap<>(); for (var e : objeto.entrySet()) saida.put(String.valueOf(e.getKey()), e.getValue()); return saida;
@@ -287,7 +292,7 @@ public final class ValidadorLaboratorios extends JFrame {
     private static String campo(Map<String,Object> m, String chave) {
         Object o=m.get(chave); if (!(o instanceof String s) || s.isBlank()) throw new IllegalArgumentException("o campo '" + chave + "' deve conter um texto"); return s.trim();
     }
-    private static Laboratorio carregar(String nome, String conteudo) {
+    private static Laboratorio carregar(String conteudo) {
         Object parsed=Json.parse(conteudo.replaceFirst("^\\uFEFF", "")); if (!(parsed instanceof Map<?,?> dados)) throw new IllegalArgumentException("a raiz deve ser um objeto");
         Map<String,Object> m=mapa(dados); String codigo=campo(m,"codigo"), lab=campo(m,"laboratorio");
         String desc=Objects.toString(m.getOrDefault("descricao", ""));
@@ -310,7 +315,7 @@ public final class ValidadorLaboratorios extends JFrame {
     private static Path pastaAplicacao() {
         try { Path origem=Path.of(ValidadorLaboratorios.class.getProtectionDomain().getCodeSource().getLocation().toURI());
             return Files.isRegularFile(origem) ? origem.getParent() : Path.of("").toAbsolutePath(); }
-        catch (Exception e) { return Path.of("").toAbsolutePath(); }
+        catch (URISyntaxException | IllegalArgumentException | SecurityException e) { return Path.of("").toAbsolutePath(); }
     }
     private static Leitura configuracoes() throws IOException {
         Map<String,String> arquivos=new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
@@ -321,7 +326,7 @@ public final class ValidadorLaboratorios extends JFrame {
                     arquivos.put(Path.of(e.getName()).getFileName().toString(), new String(jar.readAllBytes(),StandardCharsets.UTF_8));
                 }
             }
-        } catch (Exception ignored) { /* Em execução pelo código-fonte, usar apenas JSONs externos. */ }
+        } catch (IOException | IllegalArgumentException ignored) { /* Em execução pelo código-fonte, usar apenas JSONs externos. */ }
         Path externa=pastaAplicacao().resolve("configuracoes");
         if (!Files.isDirectory(externa)) externa=Path.of("configuracoes");
         // O Code Runner do VS Code executa dentro de src; os perfis ficam no projeto.
@@ -334,7 +339,7 @@ public final class ValidadorLaboratorios extends JFrame {
         if (arquivos.isEmpty()) throw new IOException("Nenhum JSON encontrado na pasta configuracoes nem no JAR.");
         List<Laboratorio> labs=new ArrayList<>(); List<String> avisos=new ArrayList<>(); Set<String> codigos=new HashSet<>(), nomes=new HashSet<>();
         for(var e:arquivos.entrySet()) try {
-            Laboratorio lab=carregar(e.getKey(),e.getValue());
+            Laboratorio lab=carregar(e.getValue());
             if(!codigos.add(lab.codigo().toLowerCase(Locale.ROOT)) || !nomes.add(lab.nome().toLowerCase(Locale.ROOT))) throw new IllegalArgumentException("código ou laboratório duplicado");
             labs.add(lab);
         } catch (RuntimeException x) { avisos.add(e.getKey()+": "+x.getMessage()); }
@@ -350,7 +355,7 @@ public final class ValidadorLaboratorios extends JFrame {
         try { Leitura labs=configuracoes();
             if (args.length>0 && args[0].equals("--check-config")) {System.out.println("Configurações válidas: "+labs.laboratorios().size()); for(String aviso:labs.avisos())System.err.println(aviso);return;}
             SwingUtilities.invokeLater(() -> new ValidadorLaboratorios(labs));
-        } catch(Exception e) { if(args.length>0 && args[0].equals("--check-config")){System.err.println(e.getMessage());System.exit(1);} else JOptionPane.showMessageDialog(null,e.getMessage(),"Configuração inválida",JOptionPane.ERROR_MESSAGE); }
+        } catch(IOException | IllegalArgumentException e) { if(args.length>0 && args[0].equals("--check-config")){System.err.println(e.getMessage());System.exit(1);} else JOptionPane.showMessageDialog(null,e.getMessage(),"Configuração inválida",JOptionPane.ERROR_MESSAGE); }
     }
     /** Parser JSON mínimo para os perfis e respostas CIM. */
     private static final class Json {
