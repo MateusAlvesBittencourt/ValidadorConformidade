@@ -1,6 +1,10 @@
 @echo off
 setlocal
-cd /d "%~dp0"
+pushd "%~dp0" || (
+    echo ERRO: Nao foi possivel acessar a pasta portatil.
+    pause
+    exit /b 1
+)
 
 if not exist "runtime\bin\javaw.exe" (
     echo ERRO: Runtime Java nao encontrado. Copie a pasta portatil inteira.
@@ -19,4 +23,5 @@ if errorlevel 1 (
     pause
     exit /b 1
 )
+popd
 endlocal
