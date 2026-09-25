@@ -2,12 +2,12 @@
 setlocal
 cd /d "%~dp0"
 
-if exist "dist\ValidadorLaboratorios-portatil\ValidadorLaboratorios.exe" (
-    "dist\ValidadorLaboratorios-portatil\ValidadorLaboratorios.exe"
+if exist "dist\ValidadorLaboratorios-portatil\executar_portatil.bat" (
+    "dist\ValidadorLaboratorios-portatil\executar_portatil.bat"
     goto :fim
 )
-if exist "ValidadorLaboratorios-portatil\ValidadorLaboratorios.exe" (
-    "ValidadorLaboratorios-portatil\ValidadorLaboratorios.exe"
+if exist "ValidadorLaboratorios-portatil\executar_portatil.bat" (
+    "ValidadorLaboratorios-portatil\executar_portatil.bat"
     goto :fim
 )
 
