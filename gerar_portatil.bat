@@ -61,17 +61,17 @@ echo Nas maquinas clientes, abra ValidadorLaboratorios.exe DENTRO dessa pasta.
 echo Tambem e possivel usar executar_portatil.bat na mesma pasta.
 echo Copie a pasta inteira: o runtime Java fica na subpasta runtime.
 
-set "DESTINO=J:\C\Certificação Imagem\Validador"
-if exist "J:\" (
+set "DESTINO=\\10.40.48.8\software$\C\Certificação Imagem"
+if exist "\\10.40.48.8\software$\C\" (
     if not exist "%DESTINO%\" mkdir "%DESTINO%"
     if exist "%DESTINO%\" (
         robocopy "dist\ValidadorLaboratorios-portatil" "%DESTINO%\ValidadorLaboratorios-portatil" /E /R:2 /W:1 /NFL /NDL /NJH /NJS
-        if errorlevel 8 (echo AVISO: Copia incompleta na unidade J:. Use a versao em dist.) else (echo Copiado para: "%DESTINO%\ValidadorLaboratorios-portatil")
+        if errorlevel 8 (echo AVISO: Copia incompleta no compartilhamento. Use a versao em dist.) else (echo Copiado para: "%DESTINO%\ValidadorLaboratorios-portatil")
     ) else (
-        echo AVISO: Nao foi possivel criar a pasta na unidade J:.
+        echo AVISO: Nao foi possivel criar a pasta no compartilhamento.
     )
 ) else (
-    echo AVISO: A unidade J: nao esta acessivel. A versao portatil permanece em dist.
+    echo AVISO: Compartilhamento inacessivel. A versao portatil permanece em dist.
 )
 pause
 exit /b 0
