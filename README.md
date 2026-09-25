@@ -8,13 +8,13 @@ A versão principal fica em `src/ValidadorLaboratorios.java` e usa Swing, sem de
 
 ### Gerar a versão portátil (clientes sem Java)
 
-Execute `gerar_portatil.bat` em um **Windows com JDK 17 ou superior**. O script usa `jlink` para criar `distValidadorLaboratorios-portatil` com `executar_portatil.bat`, `appValidadorLaboratorios.jar` e `runtime`. Não gera um launcher próprio `.exe`. Também copia a pasta para `\\10.40.48.8\software$\C\Certificação Imagem\ValidadorLaboratorios-portatil` se o compartilhamento estiver disponível. No computador cliente, execute:
+Execute `gerar_portatil.bat` em um **Windows com JDK 17 ou superior**. O script usa `jlink` para criar `dist\ValidadorLaboratorios-portatil` com `executar_portatil.bat`, `app\ValidadorLaboratorios.jar` e `runtime`. Não gera um launcher próprio `.exe`. Também copia a pasta para `\\10.40.48.8\software$\C\Certificação Imagem\ValidadorLaboratorios-portatil` se o compartilhamento estiver disponível. No computador cliente, execute:
 
 ```text
 \\10.40.48.8\software$\C\Certificação Imagem\ValidadorLaboratorios-portatil\executar_portatil.bat
 ```
 
-O script usa `runtimeinjavaw.exe` para abrir o JAR com o Java empacotado; o cliente não precisa instalar Java. Mantenha **a pasta inteira**. Abrir diretamente o JAR pela associação do Windows pode escolher outro Java ou falhar se ele não estiver instalado. Para atualizar, gere novamente e distribua a pasta completa. Se houver um launcher `ValidadorLaboratorios.exe` antigo, ele não faz parte do novo pacote.
+O script usa `runtime\bin\javaw.exe` para abrir o JAR com o Java empacotado; o cliente não precisa instalar Java. Mantenha **a pasta inteira**. Abrir diretamente o JAR pela associação do Windows pode escolher outro Java ou falhar se ele não estiver instalado. Para atualizar, gere novamente e distribua a pasta completa. Se houver um launcher `ValidadorLaboratorios.exe` antigo, ele não faz parte do novo pacote.
 
 Se a geração informar que não encontrou um JDK completo, confira `where java`, `where javac` e `where jlink` no Prompt de Comando. `java --version` verifica apenas a execução de Java; para gerar o pacote, a máquina de compilação precisa de um JDK com `javac.exe`, `jlink.exe` e a pasta `jmods`. Se o JDK estiver instalado fora dos caminhos comuns, defina `JAVA_HOME` para a pasta principal do JDK e execute novamente o `.bat`.
 
