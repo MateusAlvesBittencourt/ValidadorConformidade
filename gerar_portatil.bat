@@ -39,11 +39,13 @@ if errorlevel 1 goto :falha
 "%JDK_BIN%java.exe" -jar "build\pacote\ValidadorLaboratorios.jar" --check-config
 if errorlevel 1 goto :falha
 
-"%JDK_BIN%jpackage.exe" --type app-image --input "build\pacote" --dest "build\portatil" --name "ValidadorLaboratorios" --main-jar "ValidadorLaboratorios.jar" --main-class "ValidadorLaboratorios" --add-modules java.desktop --jlink-options "--strip-debug --no-man-pages --no-header-files"
+if not exist "build\portatil\ValidadorLaboratorios\app\" mkdir "build\portatil\ValidadorLaboratorios\app"
+if not exist "build\portatil\ValidadorLaboratorios\app\" goto :falha
+"%JDK_BIN%jlink.exe" --add-modules java.desktop --strip-debug --no-man-pages --no-header-files --output "build\portatil\ValidadorLaboratorios\runtime"
 if errorlevel 1 goto :falha
-if not exist "build\portatil\ValidadorLaboratorios\ValidadorLaboratorios.exe" goto :falha
-if not exist "build\portatil\ValidadorLaboratorios\runtime\release" goto :falha
 if not exist "build\portatil\ValidadorLaboratorios\runtime\bin\javaw.exe" goto :falha
+copy /Y "build\pacote\ValidadorLaboratorios.jar" "build\portatil\ValidadorLaboratorios\app\ValidadorLaboratorios.jar" >nul
+if errorlevel 1 goto :falha
 "build\portatil\ValidadorLaboratorios\runtime\bin\java.exe" -jar "build\portatil\ValidadorLaboratorios\app\ValidadorLaboratorios.jar" --check-config
 if errorlevel 1 goto :falha
 copy /Y "executar_portatil.bat" "build\portatil\ValidadorLaboratorios\executar_portatil.bat" >nul
@@ -51,14 +53,15 @@ if errorlevel 1 goto :falha
 
 robocopy "build\portatil\ValidadorLaboratorios" "dist\ValidadorLaboratorios-portatil" /E /R:2 /W:1 /NFL /NDL /NJH /NJS
 if errorlevel 8 goto :falha
-if not exist "dist\ValidadorLaboratorios-portatil\ValidadorLaboratorios.exe" goto :falha
+if not exist "dist\ValidadorLaboratorios-portatil\app\ValidadorLaboratorios.jar" goto :falha
+if exist "dist\ValidadorLaboratorios-portatil\ValidadorLaboratorios.exe" del /f /q "dist\ValidadorLaboratorios-portatil\ValidadorLaboratorios.exe"
+if exist "dist\ValidadorLaboratorios-portatil\ValidadorLaboratorios.exe" goto :falha
 if not exist "dist\ValidadorLaboratorios-portatil\runtime\release" goto :falha
 if not exist "dist\ValidadorLaboratorios-portatil\executar_portatil.bat" goto :falha
 
 echo.
 echo Versao portatil criada em: "%~dp0dist\ValidadorLaboratorios-portatil"
-echo Nas maquinas clientes, abra ValidadorLaboratorios.exe DENTRO dessa pasta.
-echo Tambem e possivel usar executar_portatil.bat na mesma pasta.
+echo Nas maquinas clientes, abra executar_portatil.bat DENTRO dessa pasta.
 echo Copie a pasta inteira: o runtime Java fica na subpasta runtime.
 
 set "DESTINO=\\10.40.48.8\software$\C\Certificação Imagem"
@@ -66,7 +69,10 @@ if exist "\\10.40.48.8\software$\C\" (
     if not exist "%DESTINO%\" mkdir "%DESTINO%"
     if exist "%DESTINO%\" (
         robocopy "dist\ValidadorLaboratorios-portatil" "%DESTINO%\ValidadorLaboratorios-portatil" /E /R:2 /W:1 /NFL /NDL /NJH /NJS
-        if errorlevel 8 (echo AVISO: Copia incompleta no compartilhamento. Use a versao em dist.) else (echo Copiado para: "%DESTINO%\ValidadorLaboratorios-portatil")
+        if errorlevel 8 (echo AVISO: Copia incompleta no compartilhamento. Use a versao em dist.) else (
+            if exist "%DESTINO%\ValidadorLaboratorios-portatil\ValidadorLaboratorios.exe" del /f /q "%DESTINO%\ValidadorLaboratorios-portatil\ValidadorLaboratorios.exe"
+            if exist "%DESTINO%\ValidadorLaboratorios-portatil\ValidadorLaboratorios.exe" (echo AVISO: Nao foi possivel remover o launcher antigo.) else (echo Copiado para: "%DESTINO%\ValidadorLaboratorios-portatil")
+        )
     ) else (
         echo AVISO: Nao foi possivel criar a pasta no compartilhamento.
     )
@@ -78,11 +84,11 @@ exit /b 0
 
 :sem_jdk
 echo ERRO: Java para executar JARs foi encontrado, mas nenhum JDK completo para gerar o pacote foi localizado.
-echo Confira JAVA_HOME e se a instalacao inclui javac.exe, jpackage.exe e jmods\java.desktop.jmod.
+echo Confira JAVA_HOME e se a instalacao inclui javac.exe, jlink.exe e jmods\java.desktop.jmod.
 echo Caminhos detectados nesta maquina:
 where java.exe 2>nul
 where javac.exe 2>nul
-where jpackage.exe 2>nul
+where jlink.exe 2>nul
 goto :falha
 
 :sem_fontes
@@ -98,7 +104,7 @@ exit /b 1
 if defined JDK_BIN exit /b 0
 if not exist "%~1java.exe" exit /b 0
 if not exist "%~1javac.exe" exit /b 0
-if not exist "%~1jpackage.exe" exit /b 0
+if not exist "%~1jlink.exe" exit /b 0
 if not exist "%~1..\jmods\java.base.jmod" exit /b 0
 if not exist "%~1..\jmods\java.desktop.jmod" exit /b 0
 set "JDK_BIN=%~1"
